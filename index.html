@@ -124,9 +124,37 @@ footer{color:#7e97b3;font-size:11px;text-align:center;padding:20px}
     <div class="live-kpi"><span>Latest API observation</span><b id="liveLatestRate">—</b><small id="liveLatestDate">Waiting for connection</small></div>
     <div class="live-kpi"><span>API monthly average</span><b id="liveMonthlyAverage">—</b><small id="liveMonthlyLabel">No monthly data yet</small></div>
   </div>
-  <div class="live-columns single-live-column">
-    <div class="live-table-wrap"><h3>Recent daily API observations</h3><div class="small">PHP per USD · ExchangeRate-API indicative midpoint</div>
-      <table id="liveDailyTable"><tr><td class="empty-cell">Connect the Apps Script web app to load data.</td></tr></table></div>
+  <div class="live-columns">
+    <div class="live-table-wrap">
+      <h3>Recent daily API observations</h3>
+      <div class="small">PHP per USD · ExchangeRate-API indicative midpoint</div>
+      <table id="liveDailyTable">
+        <thead>
+          <tr><th>Date</th><th>USD/PHP</th></tr>
+        </thead>
+        <tbody>
+          <tr><td colspan="2" class="empty-cell">Connect the Apps Script web app to load data.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="live-table-wrap">
+      <h3>Monthly API vs BSP comparison</h3>
+      <div class="small">API monthly average compared with BSP period average</div>
+      <table id="liveMonthlyTable">
+        <thead>
+          <tr>
+            <th>Month</th>
+            <th>API mean</th>
+            <th>BSP mean</th>
+            <th>Difference</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td colspan="4" class="empty-cell">Waiting for monthly data...</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
   <div class="live-footnote" id="liveFootnote">Daily API snapshots are collected and stored in Google Sheets. Monthly averages are provisional until the month is complete.</div>
   <div class="small attribution"><a href="https://www.exchangerate-api.com" target="_blank" rel="noopener">Rates By Exchange Rate API</a> · ExchangeRate-API Free plan · collected and cached by this project.</div>
@@ -463,18 +491,32 @@ function renderLiveData(payload) {
     $("liveMonthlyAverage").textContent = "—";
     $("liveMonthlyLabel").textContent = "Awaiting daily observations";
   }
-  let dhtml = "<tr><th>Date</th><th>USD/PHP</th></tr>";
+  let dhtml = "";
   daily.slice(0,10).forEach(x => dhtml += "<tr><td>"+escapeLive(x.rate_date)+"</td><td>"+php(x.exchange_rate)+"</td></tr>");
   if (!daily.length) dhtml += '<tr><td colspan="2" class="empty-cell">No daily observations recorded yet.</td></tr>';
-  $("liveDailyTable").innerHTML = dhtml;
-  let mhtml = "<tr><th>Month</th><th>API mean</th><th>BSP mean</th><th>Difference</th></tr>";
+  const dailyTable = document.getElementById("liveDailyTable");
+  if (dailyTable) {
+    const dailyTbody = dailyTable.tBodies[0] || dailyTable.createTBody();
+    dailyTbody.innerHTML = dhtml;
+  }
+  let mhtml = "";
   monthly.slice(0,10).forEach(x => {
     mhtml += "<tr><td>"+escapeLive(x.month)+(x.month===currentMonth?" *":"")+"</td><td>"+php(x.api_monthly_average)+"</td><td>"+php(x.bsp_monthly_average)+"</td><td>"+signedPhp(x.difference_php)+"</td></tr>";
   });
   if (!monthly.length) mhtml += '<tr><td colspan="4" class="empty-cell">Monthly values appear after collection and aggregation.</td></tr>';
-  $("liveMonthlyTable").innerHTML = mhtml;
-  $("liveFootnote").textContent = (payload.bsp_monthly_comparison_note || "") +
-    " Latest dashboard payload: " + new Date(payload.generated_at).toLocaleString();
+  const monthlyTable = document.getElementById("liveMonthlyTable");
+  if (monthlyTable) {
+    const monthlyTbody = monthlyTable.tBodies[0] || monthlyTable.createTBody();
+    monthlyTbody.innerHTML = mhtml;
+  }
+  const footnote = document.getElementById("liveFootnote");
+  if (footnote) {
+    const generatedAt = payload.generated_at
+      ? new Date(payload.generated_at).toLocaleString()
+      : "timestamp unavailable";
+    footnote.textContent = (payload.bsp_monthly_comparison_note || "") +
+      " Latest dashboard payload: " + generatedAt;
+  }
 }
 loadLiveData();
 
