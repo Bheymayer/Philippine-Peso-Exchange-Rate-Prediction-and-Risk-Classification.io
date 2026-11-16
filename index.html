@@ -31,6 +31,9 @@ footer{color:#7e97b3;font-size:11px;text-align:center;padding:20px}
 @media(max-width:900px){.metric{grid-column:span 6}.wide,.side,.half{grid-column:span 12}}
 @media(max-width:520px){.metric{grid-column:span 12}.wrap{padding:16px}.card{padding:14px}}
 .prediction-panel{border-color:#23608a;background:linear-gradient(155deg,#102c49,#0b1d32);box-shadow:0 14px 38px #0004}.scenario-block{margin-top:18px;padding:15px;background:#081a2c;border:1px solid #204563;border-radius:12px}.scenario-help{font-size:12px;color:var(--muted);margin:5px 0 13px}.scenario-number-row{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:12px;color:#c3d6e8}.scenario-entry{display:flex;align-items:center;gap:6px}.scenario-entry input{width:105px;text-align:right;font-size:16px;font-weight:800;color:#ffc46b;padding:7px 9px}.scenario-entry span{color:var(--muted);font-weight:700}.range{margin:15px 0 4px;height:8px;cursor:pointer}.range-labels{display:flex;justify-content:space-between;color:#7894af;font-size:10px}.preset-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:13px}.preset{font-size:11px;padding:6px 10px;border-radius:7px;background:#112d48;border-color:#2b5272}.preset:hover,.preset.active{background:#0d789f;color:white;border-color:#42d5f5}.reset-scenario{margin-left:auto;color:#a9c5dc}.scenario-results{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:13px}.result-box{background:#0b1d31;border:1px solid #1d4565;border-radius:10px;padding:12px}.result-box span{display:block;color:#91a9c2;font-size:10px;text-transform:uppercase;letter-spacing:.6px}.result-box b{display:block;margin-top:5px;font-size:clamp(17px,1.7vw,22px);color:#f5f9ff}.result-box:last-child b{color:#42d5f5}.scenario-interpretation{margin-top:11px;padding:10px 12px;border-left:3px solid var(--cyan);border-radius:5px;background:#0a2035;color:#c7d9e9;font-size:12px}.disclaimer{margin-top:10px;line-height:1.45}
+#apiRateInput{width:125px;color:#42d5f5}
+#apiReferenceLabel{color:#8ea8c0;font-size:10px}
+.scenario-entry input:focus{outline:2px solid #42d5f5;outline-offset:2px}
 .live-panel{border-color:#245477;background:linear-gradient(145deg,#102b46,#0a1b30)}
 .live-head{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;flex-wrap:wrap}
 .live-head h2{font-size:18px;margin:5px 0}
@@ -60,6 +63,7 @@ footer{color:#7e97b3;font-size:11px;text-align:center;padding:20px}
 .legend-line{width:24px;border-top:2px solid #42d5f5}.legend-dash{border-top:2px dashed #ffc46b}
 .legend-band{display:inline-block;width:22px;height:12px;background:#ffc46b35;border:1px solid #ffc46b88;border-radius:2px}
 .forecast-table-wrap{overflow:auto;margin-top:12px}.forecast-table-wrap table{min-width:850px}.forecast-table-wrap th{text-align:right}.forecast-table-wrap th:first-child{text-align:left}
+.returns-panel{min-width:0}.returns-panel canvas{height:310px;cursor:crosshair}.returns-legend{margin-top:8px}.returns-table-wrap table{min-width:430px}.returns-table-wrap th,.returns-table-wrap td{padding:7px 6px;font-size:11px}.returns-table-wrap td:first-child,.returns-table-wrap th:first-child{white-space:nowrap}.returns-table-wrap td{font-variant-numeric:tabular-nums}
 
 .live-panel{display:flex;flex-direction:column;gap:10px;padding:15px}
 .live-panel .live-head h2{font-size:15px}
@@ -83,6 +87,40 @@ footer{color:#7e97b3;font-size:11px;text-align:center;padding:20px}
 
 .file-load-btn{display:inline-flex;align-items:center;justify-content:center;padding:9px 13px;border:1px solid #315675;border-radius:9px;background:#102b45;color:#dcecff;font-size:12px;cursor:pointer}
 .file-load-btn:hover{background:#174061;border-color:#42d5f5}
+
+.live-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.live-refresh{padding:7px 11px;border-radius:9px;border:1px solid #315675;background:#102b45;color:#dcecff;font-size:11px;font-weight:700}
+.live-refresh:disabled{opacity:.55;cursor:wait}
+.toolbar label{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+select:focus-visible,input:focus-visible,button:focus-visible,.file-load-btn:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+.card{transition:border-color .18s ease,transform .18s ease}
+.card:hover{border-color:#2a5a7c}
+canvas{touch-action:pan-y}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+ 
+/* Enhanced dashboard layout and visual hierarchy */
+header{position:relative;overflow:hidden}
+header:after{content:"";position:absolute;right:-90px;top:-150px;width:360px;height:360px;border:1px solid #2a6488;border-radius:50%;box-shadow:0 0 0 35px #1b527022,0 0 0 75px #1b527015;pointer-events:none}
+.wrap{padding-top:26px}
+.toolbar{position:sticky;top:0;z-index:50;padding:10px 12px;background:#071426ed;border:1px solid #1c4263;border-radius:12px;backdrop-filter:blur(12px)}
+.metric{position:relative;overflow:hidden}
+.metric:after{content:"";position:absolute;right:-22px;bottom:-32px;width:95px;height:95px;border-radius:50%;background:#42d5f50b}
+.metric .value{font-variant-numeric:tabular-nums}
+.card h2{letter-spacing:.1px}
+.prediction-panel .pill{letter-spacing:.45px}
+.model-validation{grid-column:span 12}
+.validation-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.validation-head h2{margin:4px 0 0}
+.validation-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:15px 0}
+.validation-grid>div{background:#091c30;border:1px solid #1d4260;border-radius:10px;padding:13px;min-width:0}
+.validation-grid span,.validation-grid small{display:block;color:#91a9c2;font-size:10px}
+.validation-grid b{display:block;font-size:clamp(18px,2vw,24px);margin:5px 0;font-variant-numeric:tabular-nums}
+.validation-grid small{font-size:10px}
+#apiRateInput{font-variant-numeric:tabular-nums}
+#liveRefresh{white-space:nowrap}
+button:active{transform:translateY(1px)}
+input[type=number]{font-variant-numeric:tabular-nums}
+@media(max-width:650px){.validation-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.toolbar{position:static}}
 </style></head><body>
 <header><div class="kicker">DICT Mastering Data Science · Group 2 · November 2026</div>
 <h1>Philippine Peso Exchange-Rate Prediction & Risk Classification</h1>
@@ -106,19 +144,27 @@ footer{color:#7e97b3;font-size:11px;text-align:center;padding:20px}
 <div class="forecastrow"><span class="small">Fuzzy score</span><b id="score">28.08 / 100</b></div>
 <div class="forecastrow"><span class="small">Recent volatility</span><b id="volatility">Moderate</b></div>
 <div class="scenario-block"><div class="label">Interactive scenario simulator</div><div class="scenario-help">Adjust the expected monthly USD/PHP percentage change.</div>
-<div class="scenario-number-row"><label for="scenarioNumber">Predicted change</label><div class="scenario-entry"><input id="scenarioNumber" type="number" min="-10" max="10" step="0.05" value="0.6009"><span>%</span></div></div>
+<div class="scenario-number-row"><label for="apiRateInput">API reference observation (PHP per USD)</label><div class="scenario-entry"><span>₱</span><input id="apiRateInput" type="number" min="0.0001" max="10000" step="0.0001" placeholder="Enter API rate" aria-describedby="apiRateHelp"></div></div>
+<div class="scenario-help" id="apiRateHelp">Enter or load the API observation. Its difference from BSP sets the comparison scenario; the scenario rate is calculated from the BSP reference to avoid double-counting.</div>
+<div class="scenario-number-row"><label for="scenarioNumber">Calculated change vs BSP</label><div class="scenario-entry"><input id="scenarioNumber" type="number" min="-10" max="10" step="0.0001" value="0.6009"><span>%</span></div></div>
+<div class="small" id="apiReferenceLabel" style="margin-top:5px">BSP reference rate: —</div>
 <input class="range" id="scenario" type="range" min="-10" max="10" step="0.05" value="0.6009215" aria-label="Scenario percentage change">
 <div class="range-labels"><span>−10% appreciation</span><span>+10% depreciation</span></div>
 <div class="preset-row"><button type="button" class="preset" data-value="-2">−2%</button><button type="button" class="preset" data-value="-1">−1%</button><button type="button" class="preset" data-value="0">0%</button><button type="button" class="preset" data-value="1">+1%</button><button type="button" class="preset" data-value="2">+2%</button><button type="button" class="preset reset-scenario" id="resetScenario">Reset model</button></div></div>
 <div class="scenario-results"><div class="result-box"><span>Scenario peso movement</span><b id="scenarioMovement">+₱0.3792</b></div><div class="result-box"><span>Scenario exchange rate</span><b id="scenarioRate">₱63.4788</b></div></div>
 <div class="scenario-interpretation" id="scenarioInterpretation">A positive change indicates projected peso depreciation against the US dollar.</div>
 <div class="small disclaimer">Scenario testing recalculates the peso movement, projected rate, and fuzzy interpretation. It does not retrain the regression model.</div></div>
-<div class="card half"><h2>Monthly percentage change · USD/PHP</h2><canvas id="returns"></canvas></div>
+<div class="card half returns-panel"><h2>Monthly percentage change · USD/PHP</h2>
+  <canvas id="returns" aria-label="Historical monthly percentage changes and three-month forecasts with 95 percent prediction intervals"></canvas>
+  <div class="chart-legend returns-legend"><span><i class="legend-line" style="border-color:#ffb86b"></i> Historical change</span><span><i class="legend-line legend-dash"></i> Forecast</span><span><i class="legend-band"></i> 95% prediction interval</span></div>
+  <div class="small" id="returnsForecastNote">Three-month forecast of monthly USD/PHP percentage changes, estimated through the selected end month.</div>
+  <div class="forecast-table-wrap returns-table-wrap" id="returnsForecastTable"></div>
+</div>
 <div class="card half live-panel">
   <div class="live-head">
     <div><div class="label">Prospective data monitoring</div><h2>ExchangeRate-API · Live USD/PHP observations</h2>
       <div class="small">Daily observations collected by Google Apps Script and stored in Google Sheets</div></div>
-    <div class="live-status" id="liveStatus"><span class="status-dot"></span><span id="liveStatusText">Not configured</span></div>
+    <div class="live-actions"><div class="live-status" id="liveStatus"><span class="status-dot"></span><span id="liveStatusText">Not configured</span></div><button type="button" id="liveRefresh" class="live-refresh" aria-label="Refresh live exchange-rate observations">↻ Refresh</button></div>
   </div>
   <div class="live-kpis">
     <div class="live-kpi"><span>Latest API observation</span><b id="liveLatestRate">—</b><small id="liveLatestDate">Waiting for connection</small></div>
@@ -158,6 +204,19 @@ footer{color:#7e97b3;font-size:11px;text-align:center;padding:20px}
   </div>
   <div class="live-footnote" id="liveFootnote">Daily API snapshots are collected and stored in Google Sheets. Monthly averages are provisional until the month is complete.</div>
   <div class="small attribution"><a href="https://www.exchangerate-api.com" target="_blank" rel="noopener">Rates By Exchange Rate API</a> · ExchangeRate-API Free plan · collected and cached by this project.</div>
+</div>
+<div class="card full model-validation">
+  <div class="validation-head">
+    <div><div class="label">Model validation snapshot</div><h2>Out-of-sample performance indicators</h2></div>
+    <span class="pill">Historical evaluation · not live metrics</span>
+  </div>
+  <div class="validation-grid">
+    <div><span>MAE</span><b>0.9713 pp</b><small>Mean absolute error</small></div>
+    <div><span>RMSE</span><b>1.3031 pp</b><small>Root mean squared error</small></div>
+    <div><span>R²</span><b>0.0643</b><small>Explained variation</small></div>
+    <div><span>Directional accuracy</span><b>58.06%</b><small>Correct direction of change</small></div>
+  </div>
+  <div class="note">These are the evaluation figures embedded in the supplied dashboard. They are displayed as historical model-validation results and are not recalculated when the date range, currency, API observation, or scenario changes.</div>
 </div>
 
 </div>
@@ -241,15 +300,20 @@ function makeForecast(data){
  const result=[];
  for(let h=1;h<=3;h++){
   prevR=a+b*prevR;logRate+=prevR;
-  // For log-level forecast, a shock at step j propagates into all later returns.
-  let variance=0;
+  // Predictive variance of the h-step-ahead monthly log return.
+  let returnVariance=0;
+  for(let k=0;k<h;k++) returnVariance += Math.pow(b,2*k)*sigma2;
+  const returnMargin=1.95996398454*Math.sqrt(Math.max(returnVariance,0));
+  // For the cumulative exchange-rate level, propagate each monthly shock.
+  let levelVariance=0;
   for(let j=0;j<h;j++){
     let weight=0,power=1;
-    for(let k=0;k<=j;k++){weight+=power;power*=b}
-    variance+=weight*weight*sigma2;
+    for(let k=0;k<=j;k++){weight+=power;power*=b;}
+    levelVariance+=weight*weight*sigma2;
   }
-  const margin=1.95996398454*Math.sqrt(Math.max(variance,0));
-  result.push({date:plusMonth(last.date,h),value:Math.exp(logRate),lower:Math.exp(logRate-margin),upper:Math.exp(logRate+margin)});
+  const levelMargin=1.95996398454*Math.sqrt(Math.max(levelVariance,0));
+  result.push({date:plusMonth(last.date,h),value:Math.exp(logRate),lower:Math.exp(logRate-levelMargin),upper:Math.exp(logRate+levelMargin),
+    changePct:(Math.exp(prevR)-1)*100,changeLower:(Math.exp(prevR-returnMargin)-1)*100,changeUpper:(Math.exp(prevR+returnMargin)-1)*100});
  }
  return {points:result,n,reason:''};
 }
@@ -344,10 +408,52 @@ function renderForecastTrend(){
 function renderTrend(){renderForecastTrend()}
 function pct(arr,key){return arr.map((r,i)=>i===0||!r[key]||!arr[i-1][key]?null:(r[key]/arr[i-1][key]-1)*100)}
 function corr(a,b){let pairs=[];for(let i=1;i<rows.length;i++){let x=rows[i-1][a],y=rows[i][a],u=rows[i-1][b],v=rows[i][b];if([x,y,u,v].every(Number.isFinite)&&x&&u)pairs.push([(y/x-1)*100,(v/u-1)*100])}if(pairs.length<3)return 0;let mx=pairs.reduce((s,p)=>s+p[0],0)/pairs.length,my=pairs.reduce((s,p)=>s+p[1],0)/pairs.length;let n=0,dx=0,dy=0;pairs.forEach(p=>{n+=(p[0]-mx)*(p[1]-my);dx+=(p[0]-mx)**2;dy+=(p[1]-my)**2});return dx&&dy?n/Math.sqrt(dx*dy):0}
-function renderReturns(){let rr=selected(),v=rr.map((r,i)=>i&&rr[i-1].USD?(r.USD/rr[i-1].USD-1)*100:null);line("returns",v,"#ffb86b",true,rr.map(r=>r.DATE),"USD")}
+function renderReturns(){
+ const rr=selected(),hist=rr.map((r,i)=>({date:r.DATE,value:i&&Number.isFinite(rr[i-1].USD)&&rr[i-1].USD>0&&Number.isFinite(r.USD)?(r.USD/rr[i-1].USD-1)*100:null}));
+ const rates=rr.map(r=>({date:r.DATE,value:Number.isFinite(r.USD)&&r.USD>0?r.USD:null}));
+ const fc=makeForecast(rates),future=fc.points;
+ // Keep the first forecast consistent with the main multiple-regression prediction
+ // when the selected period ends at the latest BSP observation.
+ const endRate=rates.filter(p=>Number.isFinite(p.value)).at(-1);
+ if(endRate&&endRate.date===String(f.latest_observed_month).slice(0,7)&&future.length&&future[0].date===String(f.forecast_month||'').slice(0,7)){
+   const firstPct=Number(f.predicted_change_pct);
+   if(Number.isFinite(firstPct)){
+     const old=future[0].changePct,shift=firstPct-old;
+     future[0].changePct=firstPct;future[0].changeLower+=shift;future[0].changeUpper+=shift;
+   }
+ }
+ $('returnsForecastNote').textContent=fc.reason||'Three-month autoregressive forecast of monthly log changes. Shaded band shows the approximate 95% prediction interval for each monthly percentage change; intervals reflect model residual uncertainty and are not guarantees.';
+ const table=$('returnsForecastTable');
+ table.innerHTML=future.length?'<table><thead><tr><th>Forecast month</th><th>Predicted change</th><th>95% lower</th><th>95% upper</th></tr></thead><tbody>'+future.map(p=>'<tr><td>'+p.date+'</td><td>'+(p.changePct>=0?'+':'')+p.changePct.toFixed(4)+'%</td><td>'+(p.changeLower>=0?'+':'')+p.changeLower.toFixed(4)+'%</td><td>'+(p.changeUpper>=0?'+':'')+p.changeUpper.toFixed(4)+'%</td></tr>').join('')+'</tbody></table>':'<div class="small">'+fc.reason+'</div>';
+ const c=$('returns'),ctx=c.getContext('2d'),ratio=window.devicePixelRatio||1,w=c.clientWidth,h=c.clientHeight;
+ c.width=Math.round(w*ratio);c.height=Math.round(h*ratio);ctx.setTransform(ratio,0,0,ratio,0,0);ctx.clearRect(0,0,w,h);
+ const labels=hist.map(p=>p.date).concat(future.map(p=>p.date));
+ const values=hist.map(p=>p.value).concat(future.map(p=>p.changePct));
+ const valid=hist.map(p=>p.value).filter(Number.isFinite).concat(future.flatMap(p=>[p.changeLower,p.changeUpper,p.changePct]));
+ if(!valid.length)return;
+ let min=Math.min(0,...valid),max=Math.max(0,...valid);if(max===min){max+=1;min-=1;}const extra=(max-min)*.1;min-=extra;max+=extra;
+ const pad={l:44,r:12,t:14,b:28},pw=Math.max(1,w-pad.l-pad.r),ph=Math.max(1,h-pad.t-pad.b),x=i=>pad.l+pw*i/Math.max(1,values.length-1),y=v=>pad.t+ph*(max-v)/(max-min);
+ ctx.font='10px Segoe UI,Arial';
+ for(let j=0;j<=4;j++){const yy=pad.t+ph*j/4,v=max-(max-min)*j/4;ctx.strokeStyle='#244562';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(pad.l,yy);ctx.lineTo(w-pad.r,yy);ctx.stroke();ctx.fillStyle='#9ab0c8';ctx.textAlign='right';ctx.fillText(v.toFixed(2)+'%',pad.l-7,yy+3);}
+ const zeroY=y(0);ctx.strokeStyle='#59738e';ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(pad.l,zeroY);ctx.lineTo(w-pad.r,zeroY);ctx.stroke();ctx.setLineDash([]);
+ const split=hist.length-1;
+ if(future.length){ctx.fillStyle='rgba(255,196,107,.17)';ctx.beginPath();future.forEach((p,j)=>{const xx=x(split+j+1);if(j===0)ctx.moveTo(xx,y(p.changeUpper));else ctx.lineTo(xx,y(p.changeUpper));});for(let j=future.length-1;j>=0;j--)ctx.lineTo(x(split+j+1),y(future[j].changeLower));ctx.closePath();ctx.fill();
+   ctx.strokeStyle='#ffc46b';ctx.lineWidth=1;ctx.setLineDash([3,4]);for(const key of ['changeLower','changeUpper']){ctx.beginPath();future.forEach((p,j)=>{if(j===0)ctx.moveTo(x(split+j+1),y(p[key]));else ctx.lineTo(x(split+j+1),y(p[key]));});ctx.stroke();}ctx.setLineDash([]);
+   ctx.strokeStyle='#526d85';ctx.beginPath();ctx.moveTo(x(split),pad.t);ctx.lineTo(x(split),h-pad.b);ctx.stroke();}
+ ctx.strokeStyle='#ffb86b';ctx.lineWidth=2;ctx.beginPath();let active=false;hist.forEach((p,i)=>{if(!Number.isFinite(p.value)){active=false;return;}if(!active){ctx.moveTo(x(i),y(p.value));active=true;}else ctx.lineTo(x(i),y(p.value));});ctx.stroke();
+ if(future.length){ctx.strokeStyle='#42d5f5';ctx.lineWidth=2.5;ctx.setLineDash([7,4]);ctx.beginPath();const lastHist=hist.at(-1);if(lastHist&&Number.isFinite(lastHist.value))ctx.moveTo(x(split),y(lastHist.value));future.forEach((p,j)=>ctx.lineTo(x(split+j+1),y(p.changePct)));ctx.stroke();ctx.setLineDash([]);}
+ const ticks=new Set([0,Math.max(0,split),labels.length-1]);ctx.fillStyle='#9ab0c8';ctx.textAlign='center';[...ticks].forEach(i=>{if(labels[i])ctx.fillText(labels[i],x(i),h-8);});
+ c.onpointermove=ev=>{const rect=c.getBoundingClientRect(),px=ev.clientX-rect.left,i=Math.max(0,Math.min(values.length-1,Math.round((px-pad.l)/pw*(values.length-1)))),val=values[i];if(!Number.isFinite(val)){tip.style.display='none';return;}$('tipDate').textContent=labels[i];$('tipValue').textContent=(val>=0?'+':'')+val.toFixed(4)+'%';const p=i>=hist.length?future[i-hist.length]:null;$('tipDetail').textContent=p?'Forecast · 95% PI: '+p.changeLower.toFixed(4)+'% to '+p.changeUpper.toFixed(4)+'%':'USD/PHP monthly percentage change';tip.style.display='block';tip.style.left=Math.min(ev.clientX+14,window.innerWidth-215)+'px';tip.style.top=Math.min(ev.clientY+14,window.innerHeight-100)+'px';};
+ c.onpointerleave=()=>{tip.style.display='none'};
+}
 function fuzzy(p){if(p<=-1.5)return"Strong Appreciation";if(p<-.35)return"Moderate Appreciation";if(p<=.35)return"Relatively Stable";if(p<1.5)return"Moderate Depreciation";return"Strong Depreciation"}
 function scenario(){
- let p=Number($("scenario").value),base=f.last_rate_php_per_usd,move=base*p/100,rate=base+move;
+ let p=Number($("scenario").value);
+ // Scenario percentages are measured against the latest BSP reference rate.
+ // The API observation is shown separately and must not be used as a second base,
+ // otherwise the API-vs-BSP movement would be counted twice.
+ const base=Number(f.last_rate_php_per_usd);
+ let move=base*p/100,rate=base+move;
  $("scenarioNumber").value=p.toFixed(4);
  $("scenarioMovement").textContent=(move>=0?"+":"−")+"₱"+fmt(Math.abs(move));
  $("scenarioRate").textContent="₱"+fmt(rate);
@@ -360,36 +466,68 @@ function scenario(){
 }
 function renderMetrics(){let m=P.metrics;let html="";let vals=[["MAE","0.9713 pp"],["RMSE","1.3031 pp"],["R²","0.0643"],["Directional accuracy","58.06%"]];vals.forEach(([k,v])=>html+=`<div class="forecastrow"><span class="small">${k}</span><b>${v}</b></div>`);$("metrics").innerHTML=html}
 function renderTable(){let r=rows[rows.length-1],html="<tr><th>Month</th>"+codes.map(c=>`<th>${c}</th>`).join("")+"</tr><tr><td>"+r.DATE+"</td>"+codes.map(c=>`<td>${r[c]==null?"—":Number(r[c]).toFixed(4)}</td>`).join("")+"</tr>";$("table").innerHTML=html}
-function init(){ $("latest").textContent="₱"+fmt(f.last_rate_php_per_usd);$("change").textContent=signed(f.predicted_change_pct)+"%";$("movement").textContent=(f.predicted_peso_movement>=0?"+":"")+"₱"+fmt(f.predicted_peso_movement);$("projected").textContent="₱"+fmt(f.predicted_rate_php_per_usd);$("classification").textContent=f.fuzzy.classification.toUpperCase();$("score").textContent=fmt(f.fuzzy.score,2)+" / 100";$("volatility").textContent=f.fuzzy.volatility_level; $("scenario").value=f.predicted_change_pct;renderTrend();renderReturns();renderTable();scenario()}
+function init(){ $("latest").textContent="₱"+fmt(f.last_rate_php_per_usd);$("change").textContent=signed(f.predicted_change_pct)+"%";$("movement").textContent=(f.predicted_peso_movement>=0?"+":"")+"₱"+fmt(f.predicted_peso_movement);$("projected").textContent="₱"+fmt(f.predicted_rate_php_per_usd);$("classification").textContent=f.fuzzy.classification.toUpperCase();$("score").textContent=fmt(f.fuzzy.score,2)+" / 100";$("volatility").textContent=f.fuzzy.volatility_level; $("scenario").value=f.predicted_change_pct;$("apiRateInput").value=Number(f.last_rate_php_per_usd).toFixed(4);$("apiReferenceLabel").textContent="BSP reference rate: ₱"+fmt(f.last_rate_php_per_usd)+" · Waiting for API observation";renderTrend();renderReturns();renderTable();scenario()}
 $("currency").addEventListener("change",renderTrend);$("from").addEventListener("change",()=>{renderTrend();renderReturns()});$("to").addEventListener("change",()=>{renderTrend();renderReturns()});$("scenario").addEventListener("input",scenario);
 $("scenarioNumber").addEventListener("input",()=>{let v=Number($("scenarioNumber").value);if(Number.isFinite(v)){v=Math.max(-10,Math.min(10,v));$("scenario").value=v;scenario()}});
+function applyApiRateToScenario(rawRate){
+ const rate=Number(rawRate),reference=Number(f.last_rate_php_per_usd);
+ if(!Number.isFinite(rate)||rate<=0||!Number.isFinite(reference)||reference<=0)return;
+ const pctChange=((rate/reference)-1)*100;
+ $("apiRateInput").value=rate.toFixed(4);
+ $("scenarioNumber").value=pctChange.toFixed(4);
+ $("scenario").value=Math.max(-10,Math.min(10,pctChange));
+ $("apiReferenceLabel").textContent="BSP reference rate: ₱"+fmt(reference)+" · API vs BSP difference: "+(pctChange>=0?"+":"")+pctChange.toFixed(4)+"%";
+ scenario();
+}
+$("apiRateInput").addEventListener("input",ev=>{
+ const raw=ev.target.value;
+ if(raw===""){ $("apiReferenceLabel").textContent="Enter a valid API rate to compare it with BSP."; return; }
+ applyApiRateToScenario(raw);
+});
 document.querySelectorAll(".preset[data-value]").forEach(b=>b.addEventListener("click",()=>{$("scenario").value=b.dataset.value;scenario()}));
 $("resetScenario").addEventListener("click",()=>{$("scenario").value=f.predicted_change_pct;scenario()});$("reset").onclick=()=>{$("currency").value="USD";populateDateSelectors("2024-10");init()};$("download").onclick=()=>{let rr=selected(),csv=["DATE,"+codes.join(",")].concat(rr.map(r=>[r.DATE,...codes.map(c=>r[c]??"")].join(","))).join("\\n"),a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download="BSP_filtered_exchange_rates.csv";a.click();URL.revokeObjectURL(a.href)};
 
 // Load a refreshed monthly BSP CSV (DATE,USD,JPY,EUR,...). The selected
 // range defaults to October 2024 through the latest month found in that file.
+function parseCsvMatrix(text){
+ const out=[];let row=[],field="",quoted=false;
+ const input=String(text||"").replace(/^\uFEFF/,"");
+ for(let i=0;i<input.length;i++){
+   const ch=input[i],next=input[i+1];
+   if(quoted){
+     if(ch==='"'&&next==='"'){field+='"';i++;}
+     else if(ch==='"')quoted=false;
+     else field+=ch;
+   }else if(ch==='"'&&field==="")quoted=true;
+   else if(ch===","){row.push(field.trim());field="";}
+   else if(ch==="\n"){row.push(field.trim());out.push(row);row=[];field="";}
+   else if(ch!=="\r")field+=ch;
+ }
+ if(quoted)throw new Error("CSV contains an unclosed quoted field.");
+ if(field.length||row.length){row.push(field.trim());out.push(row);}
+ return out.filter(r=>r.some(v=>v!==""));
+}
 function parseMonthlyCsv(text){
- const lines=text.replace(/^\uFEFF/,"").trim().split(/\r?\n/);
- if(lines.length<2)throw new Error("The CSV must contain a header and at least one data row.");
- const headers=lines[0].split(",").map(x=>x.trim().replace(/^"|"$/g,""));
+ const matrix=parseCsvMatrix(text);
+ if(matrix.length<2)throw new Error("The CSV must contain a header and at least one data row.");
+ const headers=matrix[0].map(x=>x.trim().replace(/^"|"$/g,""));
  const dateCol=headers.findIndex(x=>x.toUpperCase()==="DATE"||x.toLowerCase()==="month");
  if(dateCol<0)throw new Error("CSV header must include DATE (YYYY-MM).");
  const colMap={};
  codes.forEach(c=>{const i=headers.findIndex(h=>h.toUpperCase()===c);if(i>=0)colMap[c]=i;});
  if(!Object.keys(colMap).length)throw new Error("No recognized currency columns found. Expected columns such as USD, JPY, EUR.");
  const parsed=[];
- lines.slice(1).forEach(line=>{
-   if(!line.trim())return;
-   const cells=line.split(",").map(x=>x.trim().replace(/^"|"$/g,""));
-   const raw=cells[dateCol]||"";
+ matrix.slice(1).forEach(cells=>{
+   const raw=(cells[dateCol]||"").trim();
    const match=raw.match(/^(\d{4})-(\d{1,2})(?:-\d{1,2})?$/);
    if(!match)return;
    const date=match[1]+"-"+String(match[2]).padStart(2,"0");
+   const month=Number(match[2]);if(month<1||month>12)return;
    const row={DATE:date};
    codes.forEach(c=>{
-     const ix=colMap[c],v=ix===undefined?"":cells[ix];
-     row[c]=v===""||v==="n.a."||v==="NA"?null:Number(v);
-     if(row[c]!==null&&!Number.isFinite(row[c]))row[c]=null;
+     const ix=colMap[c],v=ix===undefined?"":(cells[ix]||"").trim();
+     const n=Number(v.replace(/,/g,""));
+     row[c]=v===""||/^(n\.?a\.?|na|null|-)$/i.test(v)||!Number.isFinite(n)||n<=0?null:n;
    });
    parsed.push(row);
  });
@@ -434,42 +572,63 @@ function escapeLive(v) {
   return String(v === null || v === undefined ? "" : v).replace(/[&<>"']/g, c =>
     ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 }
+let liveRequestTimer=null,liveRequestActive=false,liveRefreshTimer=null,lastLiveSuccessAt=null;
 function loadLiveData() {
   if (!LIVE_API_URL || LIVE_API_URL.indexOf("PASTE_YOUR_") === 0) {
     setLiveStatus("", "Not connected");
-    $("liveFootnote").textContent = "Deploy the Google Apps Script web app, then paste its /exec URL into LIVE_API_URL near the bottom of this HTML file. The API key remains in Apps Script Script Properties.";
+    $("liveFootnote").textContent = "Deploy the Google Apps Script web app, then paste its /exec URL into LIVE_API_URL near the bottom of this HTML file. Keep the API key in Apps Script Script Properties.";
     return;
   }
+  if(liveRequestActive)return;
+  liveRequestActive=true;
+  const button=$("liveRefresh");
+  if(button){button.disabled=true;button.textContent="↻ Loading…";}
   setLiveStatus("", "Connecting…");
   const callbackName = "fxCapstoneLiveCallback";
   const old = document.getElementById("fxLiveJsonp");
   if (old) old.remove();
+  if(liveRequestTimer)clearTimeout(liveRequestTimer);
+  let finished=false;
+  const finish=()=>{
+    if(finished)return;
+    finished=true;liveRequestActive=false;
+    if(liveRequestTimer){clearTimeout(liveRequestTimer);liveRequestTimer=null;}
+    delete window[callbackName];
+    const node=document.getElementById("fxLiveJsonp");if(node)node.remove();
+    if(button){button.disabled=false;button.textContent="↻ Refresh";}
+  };
   window[callbackName] = function(payload) {
     try {
       if (!payload || payload.error || !payload.ok) throw new Error(payload && payload.error ? payload.error : "Invalid Apps Script response");
       renderLiveData(payload);
-      setLiveStatus("connected", "Connected");
+      lastLiveSuccessAt=new Date();
+      setLiveStatus("connected", "Feed received · "+lastLiveSuccessAt.toLocaleTimeString());
     } catch (err) {
-      setLiveStatus("error", "Error");
-      $("liveFootnote").textContent = err.message;
-    } finally {
-      delete window[callbackName];
-      const node = document.getElementById("fxLiveJsonp");
-      if (node) node.remove();
-    }
+      setLiveStatus("error", "Data error");
+      $("liveFootnote").textContent = "The live endpoint responded, but its data could not be rendered: "+err.message;
+    } finally {finish();}
   };
   const script = document.createElement("script");
   script.id = "fxLiveJsonp";
   script.onerror = function() {
-    setLiveStatus("error", "Disconnected");
+    setLiveStatus("error", "Feed unavailable");
     $("liveFootnote").textContent = "Could not load the Apps Script endpoint. Check the /exec URL, web app access setting, and deployment version.";
-    delete window[callbackName];
-    script.remove();
+    finish();
   };
   script.src = LIVE_API_URL + (LIVE_API_URL.indexOf("?") >= 0 ? "&" : "?") +
-    "action=dashboard&callback=" + callbackName + "&_=" + Date.now();
+    "action=dashboard&callback=" + encodeURIComponent(callbackName) + "&_=" + Date.now();
+  liveRequestTimer=setTimeout(()=>{
+    setLiveStatus("error","Timed out");
+    $("liveFootnote").textContent="The live endpoint did not respond within 15 seconds. Check Apps Script deployment, permissions, and execution logs.";
+    finish();
+  },15000);
   document.body.appendChild(script);
 }
+function startLiveAutoRefresh(){
+  if(liveRefreshTimer)clearInterval(liveRefreshTimer);
+  liveRefreshTimer=setInterval(()=>{if(!document.hidden)loadLiveData();},10*60*1000);
+}
+
 function renderLiveData(payload) {
   const latest = payload.latest;
   const daily = Array.isArray(payload.daily) ? payload.daily : [];
@@ -477,11 +636,14 @@ function renderLiveData(payload) {
   if (latest) {
     $("liveLatestRate").textContent = php(latest.exchange_rate);
     $("liveLatestDate").textContent = escapeLive(latest.rate_date) + " · API updated " + escapeLive(latest.api_update_utc || "");
+    // Feed the latest API PHP-per-USD observation into the scenario simulator.
+    applyApiRateToScenario(latest.exchange_rate);
   } else {
     $("liveLatestRate").textContent = "—";
     $("liveLatestDate").textContent = "No collected observations yet";
   }
-  const currentMonth = new Date().toISOString().slice(0,7);
+  const now = new Date();
+  const currentMonth = now.getFullYear()+"-"+String(now.getMonth()+1).padStart(2,"0");
   const month = monthly.find(x => x.month === currentMonth) || monthly[0];
   if (month) {
     $("liveMonthlyAverage").textContent = php(month.api_monthly_average);
@@ -518,6 +680,191 @@ function renderLiveData(payload) {
       " Latest dashboard payload: " + generatedAt;
   }
 }
+$("liveRefresh").addEventListener("click",loadLiveData);
+document.addEventListener("visibilitychange",()=>{if(!document.hidden && (!lastLiveSuccessAt || Date.now()-lastLiveSuccessAt.getTime()>10*60*1000))loadLiveData();});
 loadLiveData();
+startLiveAutoRefresh();
 
-</script></body></html>
+</script>
+
+
+<style>
+#sixModelDashboard{--sm-bg:#071a2c;--sm-panel:#0c243b;--sm-panel2:#102e49;--sm-line:#234b69;--sm-text:#eaf4ff;--sm-muted:#9db4ca;--sm-cyan:#48d8f4;--sm-green:#4bd5a2;--sm-amber:#ffc46b;color:var(--sm-text);background:linear-gradient(145deg,#071a2c,#0a2138);border:1px solid #234b69;border-radius:18px;padding:clamp(15px,2.2vw,26px);margin:24px 0;box-shadow:0 16px 45px #0003}
+#sixModelDashboard *{box-sizing:border-box}
+#sixModelDashboard h2,#sixModelDashboard h3{color:var(--sm-text);margin:0}
+#sixModelDashboard .sm-eyebrow{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--sm-cyan);font-weight:800}
+#sixModelDashboard .sm-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+#sixModelDashboard .sm-head h2{font-size:clamp(19px,2.5vw,27px);margin:5px 0}
+#sixModelDashboard .sm-sub{color:var(--sm-muted);font-size:12px;max-width:850px}
+#sixModelDashboard .sm-status{border:1px solid #315875;border-radius:99px;padding:6px 10px;color:#b9d1e5;font-size:11px;white-space:nowrap}
+#sixModelDashboard .sm-controls{display:flex;align-items:end;gap:10px;flex-wrap:wrap;background:#081d31;border:1px solid var(--sm-line);padding:12px;border-radius:12px;margin:15px 0}
+#sixModelDashboard label{display:flex;flex-direction:column;gap:5px;color:var(--sm-muted);font-size:11px}
+#sixModelDashboard select,#sixModelDashboard button{background:#102e49;border:1px solid #315875;color:var(--sm-text);border-radius:8px;padding:9px 11px;font:inherit}
+#sixModelDashboard button{cursor:pointer;font-size:12px;font-weight:700}
+#sixModelDashboard button:hover{border-color:var(--sm-cyan);color:var(--sm-cyan)}
+#sixModelDashboard .sm-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:14px 0}
+#sixModelDashboard .sm-kpi{background:#0a2035;border:1px solid var(--sm-line);border-radius:11px;padding:13px;min-width:0}
+#sixModelDashboard .sm-kpi span{display:block;color:var(--sm-muted);font-size:10px;text-transform:uppercase;letter-spacing:.7px}
+#sixModelDashboard .sm-kpi b{display:block;color:var(--sm-text);font-size:clamp(18px,2.2vw,26px);font-variant-numeric:tabular-nums;margin:5px 0;overflow-wrap:anywhere}
+#sixModelDashboard .sm-kpi small{color:var(--sm-muted);font-size:10px}
+#sixModelDashboard .sm-panels{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(280px,.85fr);gap:12px}
+#sixModelDashboard .sm-panel{background:#0a2035;border:1px solid var(--sm-line);border-radius:12px;padding:14px;min-width:0}
+#sixModelDashboard .sm-panel h3{font-size:14px;margin-bottom:4px}
+#sixModelDashboard .sm-muted{color:var(--sm-muted);font-size:11px}
+#sixModelDashboard canvas{width:100%;height:310px;display:block;margin-top:10px}
+#sixModelDashboard .sm-legend{display:flex;gap:12px;flex-wrap:wrap;color:var(--sm-muted);font-size:10px;margin-top:8px}
+#sixModelDashboard .sm-dot{display:inline-block;width:16px;height:3px;vertical-align:middle;margin-right:5px;border-radius:3px}
+#sixModelDashboard .sm-tablewrap{overflow:auto;margin-top:10px}
+#sixModelDashboard table{width:100%;border-collapse:collapse;font-size:11px;min-width:650px}
+#sixModelDashboard th,#sixModelDashboard td{padding:9px 8px;border-bottom:1px solid #1b405d;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+#sixModelDashboard th{color:var(--sm-muted);font-weight:700}
+#sixModelDashboard th:first-child,#sixModelDashboard td:first-child{text-align:left}
+#sixModelDashboard tr.sm-best td{background:#123b45}
+#sixModelDashboard .sm-rank{display:inline-flex;align-items:center;justify-content:center;border-radius:99px;padding:3px 7px;background:#173b52;color:#bfefff;font-size:10px}
+#sixModelDashboard .sm-note{margin-top:12px;border-left:3px solid var(--sm-cyan);padding:9px 11px;background:#0b2941;color:#c1d5e7;border-radius:4px;font-size:11px;line-height:1.5}
+#sixModelDashboard .sm-latest-list{display:grid;gap:7px;margin-top:10px}
+#sixModelDashboard .sm-model-row{display:grid;grid-template-columns:minmax(100px,1fr) auto auto;gap:9px;align-items:center;padding:8px 0;border-bottom:1px solid #1b405d;font-size:11px}
+#sixModelDashboard .sm-model-row span:first-child{color:#c6d9e9}
+#sixModelDashboard .sm-model-row b{font-variant-numeric:tabular-nums}
+#sixModelDashboard .sm-model-row small{color:var(--sm-muted)}
+#sixModelDashboard .sm-download{margin-left:auto}
+@media(max-width:850px){#sixModelDashboard .sm-panels{grid-template-columns:1fr}}
+@media(max-width:620px){#sixModelDashboard .sm-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}#sixModelDashboard canvas{height:260px}}
+</style>
+<section id="sixModelDashboard" aria-labelledby="sixModelTitle">
+ <div class="sm-head">
+  <div><div class="sm-eyebrow">Python forecasting engine · historical holdout</div><h2 id="sixModelTitle">Six-Model Exchange-Rate Forecast Analytics</h2>
+   <div class="sm-sub">Compare one-step-ahead USD/PHP predictions from the six Python models against actual BSP period-average rates. Results are based on the same 93-month evaluation window.</div></div>
+  <span class="sm-status" id="smStatus">Embedded Python outputs loaded</span>
+ </div>
+ <div class="sm-controls">
+  <label>Model for chart<select id="smModel"></select></label>
+  <label>Evaluation window<select id="smWindow"><option value="all">All 93 months</option><option value="36">Latest 36 months</option><option value="24">Latest 24 months</option><option value="12">Latest 12 months</option></select></label>
+  <button id="smReset" type="button">Reset comparison</button>
+  <button id="smExport" class="sm-download" type="button">Export model results CSV</button>
+ </div>
+ <div class="sm-kpis">
+  <div class="sm-kpi"><span>Evaluation observations</span><b id="smN">93</b><small id="smDates">Feb 2019 – Oct 2026</small></div>
+  <div class="sm-kpi"><span>Best model by MAE</span><b id="smBest">MLR</b><small id="smBestMae">MAE: — PHP/USD</small></div>
+  <div class="sm-kpi"><span>Selected model MAE</span><b id="smMae">—</b><small>PHP per USD</small></div>
+  <div class="sm-kpi"><span>Selected model directional accuracy</span><b id="smDirection">—</b><small>Correct direction of monthly movement</small></div>
+ </div>
+ <div class="sm-panels">
+  <div class="sm-panel">
+   <h3>Actual vs. selected model prediction</h3><div class="sm-muted" id="smChartSubtitle">Monthly BSP period-average USD/PHP · one-step-ahead holdout</div>
+   <canvas id="smChart" aria-label="Line chart comparing actual USD PHP and selected model forecasts"></canvas>
+   <div class="sm-legend"><span><i class="sm-dot" style="background:#48d8f4"></i>Actual BSP</span><span><i class="sm-dot" style="background:#ffc46b"></i>Model prediction</span></div>
+   <div class="sm-muted" style="margin-top:8px">Hover or tap the chart to inspect the month and the two rates.</div>
+  </div>
+  <div class="sm-panel">
+   <h3>Latest evaluation month</h3><div class="sm-muted" id="smLatestMonth">October 2026</div>
+   <div class="sm-latest-list" id="smLatestList"></div>
+   <div class="sm-note" id="smInterpretation">Model results are historical holdout predictions, not future forecasts.</div>
+  </div>
+ </div>
+ <div class="sm-panel" style="margin-top:12px">
+  <h3>Six-model performance ranking</h3><div class="sm-muted">Ranked by MAE (lower is better). All metrics use the common evaluation sample.</div>
+  <div class="sm-tablewrap"><table id="smMetrics"><thead><tr><th>Rank / Model</th><th>MAE<br>PHP/USD</th><th>RMSE<br>PHP/USD</th><th>MAPE</th><th>sMAPE</th><th>R²</th><th>Direction</th><th>Theil U</th></tr></thead><tbody></tbody></table></div>
+ </div>
+ <div class="sm-note">
+  <b>Interpretation and limitations:</b> These are historical one-step-ahead holdout predictions for February 2019–October 2026, based on a chronological split. Metrics are computed over the full common 93-observation evaluation period; they are not live metrics and should not be interpreted as a guarantee of future performance. Theil U below 1 indicates improvement over the persistence benchmark. R² is calculated on the exchange-rate level. No ensemble forecast is shown because ensemble weights have not been independently validated on a separate validation period.
+ </div>
+</section>
+<script id="smForecastData" type="application/json">[{"feature_month":"2019-01-01","target_month":"2019-02-01","actual_log_return":-0.0053087323,"actual_USD_PHP":52.1901,"persistence_USD_PHP":52.4679,"MLR_predicted_return":-0.004199401,"MLR_predicted_USD_PHP":52.248028235,"Random Forest_predicted_return":6.08467e-05,"Random Forest_predicted_USD_PHP":52.4710925972,"ARIMA022_predicted_return":-0.0017461009,"ARIMA022_predicted_USD_PHP":52.3763656917,"XGBoost_predicted_return":-0.0002828815,"XGBoost_predicted_USD_PHP":52.4530576892,"LSTM_predicted_return":0.001165628,"LSTM_predicted_USD_PHP":52.5290937093,"GARCH_LSTM_predicted_return":0.0027496412,"GARCH_LSTM_predicted_USD_PHP":52.6123664235},{"feature_month":"2019-02-01","target_month":"2019-03-01","actual_log_return":0.0042694621,"actual_USD_PHP":52.4134,"persistence_USD_PHP":52.1901,"MLR_predicted_return":-0.000196739,"MLR_predicted_USD_PHP":52.1798331806,"Random Forest_predicted_return":-0.0012335744,"Random Forest_predicted_USD_PHP":52.1257593203,"ARIMA022_predicted_return":6.92755e-05,"ARIMA022_predicted_USD_PHP":52.1937156198,"XGBoost_predicted_return":-0.0018771628,"XGBoost_predicted_USD_PHP":52.0922226581,"LSTM_predicted_return":0.0011886257,"LSTM_predicted_USD_PHP":52.2521713765,"GARCH_LSTM_predicted_return":0.0011866373,"GARCH_LSTM_predicted_USD_PHP":52.2520674798},{"feature_month":"2019-03-01","target_month":"2019-04-01","actual_log_return":-0.0057631974,"actual_USD_PHP":52.1122,"persistence_USD_PHP":52.4134,"MLR_predicted_return":0.0003638186,"MLR_predicted_USD_PHP":52.4324724383,"Random Forest_predicted_return":-0.0019878285,"Random Forest_predicted_USD_PHP":52.3093146378,"ARIMA022_predicted_return":0.002718535,"ARIMA022_predicted_USD_PHP":52.5560815152,"XGBoost_predicted_return":-0.0001655059,"XGBoost_predicted_USD_PHP":52.404724424,"LSTM_predicted_return":0.0013916196,"LSTM_predicted_USD_PHP":52.4863902882,"GARCH_LSTM_predicted_return":0.0025955499,"GARCH_LSTM_predicted_USD_PHP":52.5496183001},{"feature_month":"2019-04-01","target_month":"2019-05-01","actual_log_return":0.0028704431,"actual_USD_PHP":52.262,"persistence_USD_PHP":52.1122,"MLR_predicted_return":-0.0019820258,"MLR_predicted_USD_PHP":52.0090145666,"Random Forest_predicted_return":-0.0001711461,"Random Forest_predicted_USD_PHP":52.1032819638,"ARIMA022_predicted_return":-0.0016406688,"ARIMA022_predicted_USD_PHP":52.0267712377,"XGBoost_predicted_return":0.0017917467,"XGBoost_predicted_USD_PHP":52.2056510022,"LSTM_predicted_return":0.0019688683,"LSTM_predicted_USD_PHP":52.2149031304,"GARCH_LSTM_predicted_return":0.0028072456,"GARCH_LSTM_predicted_USD_PHP":52.2586972743},{"feature_month":"2019-05-01","target_month":"2019-06-01","actual_log_return":-0.0088233973,"actual_USD_PHP":51.8029,"persistence_USD_PHP":52.262,"MLR_predicted_return":-0.0015180483,"MLR_predicted_USD_PHP":52.1827239498,"Random Forest_predicted_return":0.0019011189,"Random Forest_predicted_USD_PHP":52.3614507818,"ARIMA022_predicted_return":0.0027848146,"ARIMA022_predicted_USD_PHP":52.4077428193,"XGBoost_predicted_return":0.0051812972,"XGBoost_predicted_USD_PHP":52.53348353,"LSTM_predicted_return":0.0004987224,"LSTM_predicted_USD_PHP":52.2880707318,"GARCH_LSTM_predicted_return":0.0009957311,"GARCH_LSTM_predicted_USD_PHP":52.3140648156},{"feature_month":"2019-06-01","target_month":"2019-07-01","actual_log_return":-0.0128224569,"actual_USD_PHP":51.1429,"persistence_USD_PHP":51.8029,"MLR_predicted_return":-0.0064650945,"MLR_predicted_USD_PHP":51.4690696394,"Random Forest_predicted_return":-0.004071768,"Random Forest_predicted_USD_PHP":51.5923994536,"ARIMA022_predicted_return":-0.0027482904,"ARIMA022_predicted_USD_PHP":51.6607260449,"XGBoost_predicted_return":-0.0014950074,"XGBoost_predicted_USD_PHP":51.7255100513,"LSTM_predicted_return":-0.0002507085,"LSTM_predicted_USD_PHP":51.7899141997,"GARCH_LSTM_predicted_return":0.0029304812,"GARCH_LSTM_predicted_USD_PHP":51.9549300774},{"feature_month":"2019-07-01","target_month":"2019-08-01","actual_log_return":0.0176714134,"actual_USD_PHP":52.0547,"persistence_USD_PHP":51.1429,"MLR_predicted_return":0.0004056415,"MLR_predicted_USD_PHP":51.1636498916,"Random Forest_predicted_return":-0.0047398944,"Random Forest_predicted_USD_PHP":50.9010616515,"ARIMA022_predicted_return":-0.0023198555,"ARIMA022_predicted_USD_PHP":51.0243933759,"XGBoost_predicted_return":-0.0064191194,"XGBoost_predicted_USD_PHP":50.8156591565,"LSTM_predicted_return":0.0006306395,"LSTM_predicted_USD_PHP":51.1751629046,"GARCH_LSTM_predicted_return":0.0024674716,"GARCH_LSTM_predicted_USD_PHP":51.2692494731},{"feature_month":"2019-08-01","target_month":"2019-09-01","actual_log_return":0.0009696631,"actual_USD_PHP":52.1052,"persistence_USD_PHP":52.0547,"MLR_predicted_return":0.0004679547,"MLR_predicted_USD_PHP":52.0790649396,"Random Forest_predicted_return":-0.0012538306,"Random Forest_predicted_USD_PHP":51.9894731236,"ARIMA022_predicted_return":0.0078925393,"ARIMA022_predicted_USD_PHP":52.4671693384,"XGBoost_predicted_return":-0.0004271268,"XGBoost_predicted_USD_PHP":52.0324691409,"LSTM_predicted_return":0.0010105816,"LSTM_predicted_USD_PHP":52.107332113,"GARCH_LSTM_predicted_return":0.0027988399,"GARCH_LSTM_predicted_USD_PHP":52.200596849},{"feature_month":"2019-09-01","target_month":"2019-10-01","actual_log_return":-0.0116013941,"actual_USD_PHP":51.5042,"persistence_USD_PHP":52.1052,"MLR_predicted_return":-0.0031987414,"MLR_predicted_USD_PHP":51.9387952226,"Random Forest_predicted_return":-0.002948924,"Random Forest_predicted_USD_PHP":51.9517720625,"ARIMA022_predicted_return":-0.0011141466,"ARIMA022_predicted_USD_PHP":52.0471794988,"XGBoost_predicted_return":-0.0062985709,"XGBoost_predicted_USD_PHP":51.7780411988,"LSTM_predicted_return":0.0014794344,"LSTM_predicted_USD_PHP":52.1823432771,"GARCH_LSTM_predicted_return":0.0042589321,"GARCH_LSTM_predicted_USD_PHP":52.3275857345},{"feature_month":"2019-10-01","target_month":"2019-11-01","actual_log_return":-0.0152089872,"actual_USD_PHP":50.7268,"persistence_USD_PHP":51.5042,"MLR_predicted_return":-0.0006343434,"MLR_predicted_USD_PHP":51.4715390088,"Random Forest_predicted_return":0.0005835407,"Random Forest_predicted_USD_PHP":51.5342635655,"ARIMA022_predicted_return":-0.0024258722,"ARIMA022_predicted_USD_PHP":51.3794088154,"XGBoost_predicted_return":-0.0030751298,"XGBoost_predicted_USD_PHP":51.34605771,"LSTM_predicted_return":0.001882994,"LSTM_predicted_USD_PHP":51.6012734635,"GARCH_LSTM_predicted_return":0.0014889939,"GARCH_LSTM_predicted_USD_PHP":51.5809465618},{"feature_month":"2019-11-01","target_month":"2019-12-01","actual_log_return":0.0007941364,"actual_USD_PHP":50.7671,"persistence_USD_PHP":50.7268,"MLR_predicted_return":-0.0040660116,"MLR_predicted_USD_PHP":50.5209629931,"Random Forest_predicted_return":-0.0021562158,"Random Forest_predicted_USD_PHP":50.6175399109,"ARIMA022_predicted_return":-0.0033367024,"ARIMA022_predicted_USD_PHP":50.5578218355,"XGBoost_predicted_return":-0.0030820377,"XGBoost_predicted_USD_PHP":50.5706969876,"LSTM_predicted_return":0.0022676263,"LSTM_predicted_USD_PHP":50.8419599487,"GARCH_LSTM_predicted_return":0.0002004395,"GARCH_LSTM_predicted_USD_PHP":50.7369686723},{"feature_month":"2019-12-01","target_month":"2020-01-01","actual_log_return":0.0014074016,"actual_USD_PHP":50.8386,"persistence_USD_PHP":50.7671,"MLR_predicted_return":-0.0041882459,"MLR_predicted_USD_PHP":50.5549195425,"Random Forest_predicted_return":-0.0003310984,"Random Forest_predicted_USD_PHP":50.7502938751,"ARIMA022_predicted_return":0.0024270641,"ARIMA022_predicted_USD_PHP":50.8904646512,"XGBoost_predicted_return":-0.0009790739,"XGBoost_predicted_USD_PHP":50.7174198714,"LSTM_predicted_return":0.0034392991,"LSTM_predicted_USD_PHP":50.9420038404,"GARCH_LSTM_predicted_return":-6.72392e-05,"GARCH_LSTM_predicted_USD_PHP":50.763686576},{"feature_month":"2020-01-01","target_month":"2020-02-01","actual_log_return":-0.001846759,"actual_USD_PHP":50.7448,"persistence_USD_PHP":50.8386,"MLR_predicted_return":0.0033358271,"MLR_predicted_USD_PHP":51.0084719558,"Random Forest_predicted_return":0.0052618411,"Random Forest_predicted_USD_PHP":51.1068096554,"ARIMA022_predicted_return":0.0006900426,"ARIMA022_predicted_USD_PHP":50.8736929056,"XGBoost_predicted_return":0.0032709362,"XGBoost_predicted_USD_PHP":51.0051588908,"LSTM_predicted_return":0.0047825784,"LSTM_predicted_USD_PHP":51.0823219375,"GARCH_LSTM_predicted_return":-0.0002275497,"GARCH_LSTM_predicted_USD_PHP":50.8270330067},{"feature_month":"2020-02-01","target_month":"2020-03-01","actual_log_return":0.0031244984,"actual_USD_PHP":50.9036,"persistence_USD_PHP":50.7448,"MLR_predicted_return":-0.0078592188,"MLR_predicted_USD_PHP":50.347548601,"Random Forest_predicted_return":-0.0018110913,"Random Forest_predicted_USD_PHP":50.6529797066,"ARIMA022_predicted_return":0.0001533454,"ARIMA022_predicted_USD_PHP":50.7525820803,"XGBoost_predicted_return":-0.0086958893,"XGBoost_predicted_USD_PHP":50.3054428595,"LSTM_predicted_return":0.0017642942,"LSTM_predicted_USD_PHP":50.8344077816,"GARCH_LSTM_predicted_return":0.0001381646,"GARCH_LSTM_predicted_USD_PHP":50.7518116216},{"feature_month":"2020-03-01","target_month":"2020-04-01","actual_log_return":-0.0033196113,"actual_USD_PHP":50.7349,"persistence_USD_PHP":50.9036,"MLR_predicted_return":-0.0038271241,"MLR_predicted_USD_PHP":50.7091579176,"Random Forest_predicted_return":0.0026612285,"Random Forest_predicted_USD_PHP":51.0392465227,"ARIMA022_predicted_return":0.0020326708,"ARIMA022_predicted_USD_PHP":51.0071754935,"XGBoost_predicted_return":-0.0002161072,"XGBoost_predicted_USD_PHP":50.8926014201,"LSTM_predicted_return":-0.0001269991,"LSTM_predicted_USD_PHP":50.8971357004,"GARCH_LSTM_predicted_return":0.0017490523,"GARCH_LSTM_predicted_USD_PHP":50.9927109667},{"feature_month":"2020-04-01","target_month":"2020-05-01","actual_log_return":-0.003540316,"actual_USD_PHP":50.5556,"persistence_USD_PHP":50.7349,"MLR_predicted_return":-0.0037039615,"MLR_predicted_USD_PHP":50.5473274801,"Random Forest_predicted_return":-0.001220085,"Random Forest_predicted_USD_PHP":50.6730368558,"ARIMA022_predicted_return":-0.000821326,"ARIMA022_predicted_USD_PHP":50.6932472157,"XGBoost_predicted_return":-0.0040658684,"XGBoost_predicted_USD_PHP":50.5290387703,"LSTM_predicted_return":0.0009256831,"LSTM_predicted_USD_PHP":50.7818861816,"GARCH_LSTM_predicted_return":0.002932986,"GARCH_LSTM_predicted_USD_PHP":50.8839231866},{"feature_month":"2020-05-01","target_month":"2020-06-01","actual_log_return":-0.0091086024,"actual_USD_PHP":50.0972,"persistence_USD_PHP":50.5556,"MLR_predicted_return":-0.0028979893,"MLR_predicted_USD_PHP":50.4093025004,"Random Forest_predicted_return":-0.0013923199,"Random Forest_predicted_USD_PHP":50.4852594123,"ARIMA022_predicted_return":3.89434e-05,"ARIMA022_predicted_USD_PHP":50.5575688462,"XGBoost_predicted_return":-0.0014381246,"XGBoost_predicted_USD_PHP":50.4829451524,"LSTM_predicted_return":0.0010307988,"LSTM_predicted_USD_PHP":50.6077395183,"GARCH_LSTM_predicted_return":0.0034606403,"GARCH_LSTM_predicted_USD_PHP":50.730857825},{"feature_month":"2020-06-01","target_month":"2020-07-01","actual_log_return":-0.01264923,"actual_USD_PHP":49.4675,"persistence_USD_PHP":50.0972,"MLR_predicted_return":-0.0045672096,"MLR_predicted_USD_PHP":49.8689172931,"Random Forest_predicted_return":-0.0002944802,"Random Forest_predicted_USD_PHP":50.0824495363,"ARIMA022_predicted_return":-0.0022372116,"ARIMA022_predicted_USD_PHP":49.9852472389,"XGBoost_predicted_return":-0.0017906745,"XGBoost_predicted_USD_PHP":50.0075714493,"LSTM_predicted_return":0.0021276744,"LSTM_predicted_USD_PHP":50.2039040058,"GARCH_LSTM_predicted_return":0.0030380893,"GARCH_LSTM_predicted_USD_PHP":50.2496311977},{"feature_month":"2020-07-01","target_month":"2020-08-01","actual_log_return":-0.0126986738,"actual_USD_PHP":48.8433,"persistence_USD_PHP":49.4675,"MLR_predicted_return":-0.0008008199,"MLR_predicted_USD_PHP":49.4279012999,"Random Forest_predicted_return":0.0020616043,"Random Forest_predicted_USD_PHP":49.5695876083,"ARIMA022_predicted_return":-0.0027987456,"ARIMA022_predicted_USD_PHP":49.3292466097,"XGBoost_predicted_return":0.0024019056,"XGBoost_predicted_USD_PHP":49.5864598891,"LSTM_predicted_return":0.0021822364,"LSTM_predicted_USD_PHP":49.5755676512,"GARCH_LSTM_predicted_return":0.0014325371,"GARCH_LSTM_predicted_USD_PHP":49.538414811},{"feature_month":"2020-08-01","target_month":"2020-09-01","actual_log_return":-0.0069358977,"actual_USD_PHP":48.5057,"persistence_USD_PHP":48.8433,"MLR_predicted_return":-0.0066467239,"MLR_predicted_USD_PHP":48.5197286049,"Random Forest_predicted_return":-0.0006683731,"Random Forest_predicted_USD_PHP":48.8106653599,"ARIMA022_predicted_return":-0.0027667382,"ARIMA022_predicted_USD_PHP":48.7083501476,"XGBoost_predicted_return":0.0015380954,"XGBoost_predicted_USD_PHP":48.9184810896,"LSTM_predicted_return":0.0015663444,"LSTM_predicted_USD_PHP":48.919865378,"GARCH_LSTM_predicted_return":0.001395418,"GARCH_LSTM_predicted_USD_PHP":48.9115043938},{"feature_month":"2020-09-01","target_month":"2020-10-01","actual_log_return":-0.0004845965,"actual_USD_PHP":48.4822,"persistence_USD_PHP":48.5057,"MLR_predicted_return":-0.0011828393,"MLR_predicted_USD_PHP":48.4483594689,"Random Forest_predicted_return":0.0051789722,"Random Forest_predicted_USD_PHP":48.7575613009,"ARIMA022_predicted_return":-0.0008888692,"ARIMA022_predicted_USD_PHP":48.4626039348,"XGBoost_predicted_return":0.0096720196,"XGBoost_predicted_USD_PHP":48.9771218032,"LSTM_predicted_return":0.0025650517,"LSTM_predicted_USD_PHP":48.6302793343,"GARCH_LSTM_predicted_return":0.0025346051,"GARCH_LSTM_predicted_USD_PHP":48.6287987319},{"feature_month":"2020-10-01","target_month":"2020-11-01","actual_log_return":-0.0047573701,"actual_USD_PHP":48.2521,"persistence_USD_PHP":48.4822,"MLR_predicted_return":0.0010223677,"MLR_predicted_USD_PHP":48.5317919815,"Random Forest_predicted_return":0.0050916734,"Random Forest_predicted_USD_PHP":48.7296850503,"ARIMA022_predicted_return":0.0006569176,"ARIMA022_predicted_USD_PHP":48.5140592726,"XGBoost_predicted_return":0.0074405456,"XGBoost_predicted_USD_PHP":48.8442759089,"LSTM_predicted_return":0.0041006408,"LSTM_predicted_USD_PHP":48.681416264,"GARCH_LSTM_predicted_return":0.0021074784,"GARCH_LSTM_predicted_USD_PHP":48.5844829332},{"feature_month":"2020-11-01","target_month":"2020-12-01","actual_log_return":-0.0039121357,"actual_USD_PHP":48.0637,"persistence_USD_PHP":48.2521,"MLR_predicted_return":-0.0038113427,"MLR_predicted_USD_PHP":48.0685447268,"Random Forest_predicted_return":0.0051654573,"Random Forest_predicted_USD_PHP":48.5019890026,"ARIMA022_predicted_return":-0.001391879,"ARIMA022_predicted_USD_PHP":48.1849856346,"XGBoost_predicted_return":0.0068884105,"XGBoost_predicted_USD_PHP":48.5856239308,"LSTM_predicted_return":0.0046176943,"LSTM_predicted_USD_PHP":48.4754286821,"GARCH_LSTM_predicted_return":0.0029600484,"GARCH_LSTM_predicted_USD_PHP":48.395140149},{"feature_month":"2020-12-01","target_month":"2021-01-01","actual_log_return":-4.78543e-05,"actual_USD_PHP":48.0614,"persistence_USD_PHP":48.0637,"MLR_predicted_return":-0.0100624089,"MLR_predicted_USD_PHP":47.5824885331,"Random Forest_predicted_return":-0.0010954566,"Random Forest_predicted_USD_PHP":48.0110771317,"ARIMA022_predicted_return":-0.0004598892,"ARIMA022_predicted_USD_PHP":48.0416011046,"XGBoost_predicted_return":-0.0034338161,"XGBoost_predicted_USD_PHP":47.8989442153,"LSTM_predicted_return":0.0045220582,"LSTM_predicted_USD_PHP":48.281539017,"GARCH_LSTM_predicted_return":0.0021001673,"GARCH_LSTM_predicted_USD_PHP":48.1647478841},{"feature_month":"2021-01-01","target_month":"2021-02-01","actual_log_return":0.0029667941,"actual_USD_PHP":48.2042,"persistence_USD_PHP":48.0614,"MLR_predicted_return":-0.0061316958,"MLR_predicted_USD_PHP":47.7676037702,"Random Forest_predicted_return":0.0070932161,"Random Forest_predicted_USD_PHP":48.4035218317,"ARIMA022_predicted_return":0.0005320096,"ARIMA022_predicted_USD_PHP":48.0869759283,"XGBoost_predicted_return":0.008161122,"XGBoost_predicted_USD_PHP":48.4552423034,"LSTM_predicted_return":0.0041156788,"LSTM_predicted_USD_PHP":48.2596128973,"GARCH_LSTM_predicted_return":0.0027108109,"GARCH_LSTM_predicted_USD_PHP":48.1918621144},{"feature_month":"2021-02-01","target_month":"2021-03-01","actual_log_return":0.0076484303,"actual_USD_PHP":48.5743,"persistence_USD_PHP":48.2042,"MLR_predicted_return":-3.81906e-05,"MLR_predicted_USD_PHP":48.2023590857,"Random Forest_predicted_return":0.0017013174,"Random Forest_predicted_USD_PHP":48.2862804476,"ARIMA022_predicted_return":0.0012524337,"ARIMA022_predicted_USD_PHP":48.2646103877,"XGBoost_predicted_return":-0.0012053201,"XGBoost_predicted_USD_PHP":48.1461356181,"LSTM_predicted_return":0.0042903912,"LSTM_predicted_USD_PHP":48.4114591702,"GARCH_LSTM_predicted_return":0.0029667981,"GARCH_LSTM_predicted_USD_PHP":48.3474244851},{"feature_month":"2021-03-01","target_month":"2021-04-01","actual_log_return":-0.0023145988,"actual_USD_PHP":48.462,"persistence_USD_PHP":48.5743,"MLR_predicted_return":0.0013316428,"MLR_predicted_USD_PHP":48.6390267032,"Random Forest_predicted_return":0.0015215308,"Random Forest_predicted_USD_PHP":48.6482635485,"ARIMA022_predicted_return":0.0026833722,"ARIMA022_predicted_USD_PHP":48.7048179614,"XGBoost_predicted_return":-0.0006600488,"XGBoost_predicted_USD_PHP":48.5422524346,"LSTM_predicted_return":0.0045363647,"LSTM_predicted_USD_PHP":48.7951512918,"GARCH_LSTM_predicted_return":0.0038717014,"GARCH_LSTM_predicted_USD_PHP":48.762729723},{"feature_month":"2021-04-01","target_month":"2021-05-01","actual_log_return":-0.0105127439,"actual_USD_PHP":47.9552,"persistence_USD_PHP":48.462,"MLR_predicted_return":-0.0007147691,"MLR_predicted_USD_PHP":48.4273732357,"Random Forest_predicted_return":0.0011660646,"Random Forest_predicted_USD_PHP":48.5185427801,"ARIMA022_predicted_return":-0.0012186081,"ARIMA022_predicted_USD_PHP":48.4029797834,"XGBoost_predicted_return":0.0027901789,"XGBoost_predicted_USD_PHP":48.5974041524,"LSTM_predicted_return":0.0047564767,"LSTM_predicted_USD_PHP":48.6930574494,"GARCH_LSTM_predicted_return":0.0056766709,"GARCH_LSTM_predicted_USD_PHP":48.7378851404},{"feature_month":"2021-05-01","target_month":"2021-06-01","actual_log_return":0.0035283171,"actual_USD_PHP":48.1247,"persistence_USD_PHP":47.9552,"MLR_predicted_return":0.0034801467,"MLR_predicted_USD_PHP":48.12238187,"Random Forest_predicted_return":0.00397093,"Random Forest_predicted_USD_PHP":48.1460053292,"ARIMA022_predicted_return":-0.0028319106,"ARIMA022_predicted_USD_PHP":47.8195872736,"XGBoost_predicted_return":0.0045099184,"XGBoost_predicted_USD_PHP":48.1719603157,"LSTM_predicted_return":0.0044801938,"LSTM_predicted_USD_PHP":48.1705305926,"GARCH_LSTM_predicted_return":0.0048371544,"GARCH_LSTM_predicted_USD_PHP":48.1877286423},{"feature_month":"2021-06-01","target_month":"2021-07-01","actual_log_return":0.0370867963,"actual_USD_PHP":49.943,"persistence_USD_PHP":48.1247,"MLR_predicted_return":0.007816147,"MLR_predicted_USD_PHP":48.502323587,"Random Forest_predicted_return":0.0012839185,"Random Forest_predicted_USD_PHP":48.1865278747,"ARIMA022_predicted_return":0.0025430846,"ARIMA022_predicted_USD_PHP":48.2472409327,"XGBoost_predicted_return":0.0014736464,"XGBoost_predicted_USD_PHP":48.1956655927,"LSTM_predicted_return":0.0054300134,"LSTM_predicted_USD_PHP":48.3867285316,"GARCH_LSTM_predicted_return":0.0037288964,"GARCH_LSTM_predicted_USD_PHP":48.3044870148},{"feature_month":"2021-07-01","target_month":"2021-08-01","actual_log_return":0.0058157052,"actual_USD_PHP":50.2343,"persistence_USD_PHP":49.943,"MLR_predicted_return":0.0176535715,"MLR_predicted_USD_PHP":50.8325006528,"Random Forest_predicted_return":0.0116904379,"Random Forest_predicted_USD_PHP":50.5302816436,"ARIMA022_predicted_return":0.0123931352,"ARIMA022_predicted_USD_PHP":50.5658016136,"XGBoost_predicted_return":0.0128663685,"XGBoost_predicted_USD_PHP":50.5897352157,"LSTM_predicted_return":0.0065605752,"LSTM_predicted_USD_PHP":50.2717319644,"GARCH_LSTM_predicted_return":0.0015885609,"GARCH_LSTM_predicted_USD_PHP":50.0224005453},{"feature_month":"2021-08-01","target_month":"2021-09-01","actual_log_return":-0.0018370857,"actual_USD_PHP":50.1421,"persistence_USD_PHP":50.2343,"MLR_predicted_return":0.0064478722,"MLR_predicted_USD_PHP":50.559250839,"Random Forest_predicted_return":0.0029105623,"Random Forest_predicted_USD_PHP":50.3807230406,"ARIMA022_predicted_return":-0.0013699565,"ARIMA022_predicted_USD_PHP":50.165528313,"XGBoost_predicted_return":0.0052245115,"XGBoost_predicted_USD_PHP":50.4974300857,"LSTM_predicted_return":0.0044662314,"LSTM_predicted_USD_PHP":50.4591597745,"GARCH_LSTM_predicted_return":0.0048394883,"GARCH_LSTM_predicted_USD_PHP":50.4779975174},{"feature_month":"2021-09-01","target_month":"2021-10-01","actual_log_return":0.0120329092,"actual_USD_PHP":50.7491,"persistence_USD_PHP":50.1421,"MLR_predicted_return":0.0049069075,"MLR_predicted_USD_PHP":50.3887472918,"Random Forest_predicted_return":-0.0006948867,"Random Forest_predicted_USD_PHP":50.1072690232,"ARIMA022_predicted_return":0.0006813443,"ARIMA022_predicted_USD_PHP":50.1762756763,"XGBoost_predicted_return":0.0012188591,"XGBoost_predicted_USD_PHP":50.2032548215,"LSTM_predicted_return":0.0041236286,"LSTM_predicted_USD_PHP":50.3492943005,"GARCH_LSTM_predicted_return":0.0038070921,"GARCH_LSTM_predicted_USD_PHP":50.3333594322},{"feature_month":"2021-10-01","target_month":"2021-11-01","actual_log_return":-0.0077542616,"actual_USD_PHP":50.3571,"persistence_USD_PHP":50.7491,"MLR_predicted_return":0.0035164635,"MLR_predicted_USD_PHP":50.9278714952,"Random Forest_predicted_return":0.0052525938,"Random Forest_predicted_USD_PHP":51.0163657125,"ARIMA022_predicted_return":0.0047859226,"ARIMA022_predicted_USD_PHP":50.9925634008,"XGBoost_predicted_return":0.0063358564,"XGBoost_predicted_USD_PHP":51.0716613253,"LSTM_predicted_return":0.0033555806,"LSTM_predicted_USD_PHP":50.9196787315,"GARCH_LSTM_predicted_return":-0.0005901014,"GARCH_LSTM_predicted_USD_PHP":50.7191617218},{"feature_month":"2021-11-01","target_month":"2021-12-01","actual_log_return":-0.0021728572,"actual_USD_PHP":50.2478,"persistence_USD_PHP":50.3571,"MLR_predicted_return":0.0017286864,"MLR_predicted_USD_PHP":50.4442269203,"Random Forest_predicted_return":0.0003925231,"Random Forest_predicted_USD_PHP":50.3768702031,"ARIMA022_predicted_return":-0.0034460649,"ARIMA022_predicted_USD_PHP":50.1838648244,"XGBoost_predicted_return":-0.0002542342,"XGBoost_predicted_USD_PHP":50.3442985298,"LSTM_predicted_return":0.0027231982,"LSTM_predicted_USD_PHP":50.4944192505,"GARCH_LSTM_predicted_return":-3.80448e-05,"GARCH_LSTM_predicted_USD_PHP":50.3551842112},{"feature_month":"2021-12-01","target_month":"2022-01-01","actual_log_return":0.0194619827,"actual_USD_PHP":51.2353,"persistence_USD_PHP":50.2478,"MLR_predicted_return":0.0018178842,"MLR_predicted_USD_PHP":50.3392277611,"Random Forest_predicted_return":0.0026693724,"Random Forest_predicted_USD_PHP":50.3821092713,"ARIMA022_predicted_return":0.0012727638,"ARIMA022_predicted_USD_PHP":50.3117942966,"XGBoost_predicted_return":0.0020196007,"XGBoost_predicted_USD_PHP":50.349378497,"LSTM_predicted_return":0.0033326573,"LSTM_predicted_USD_PHP":50.4155380476,"GARCH_LSTM_predicted_return":-0.0011012061,"GARCH_LSTM_predicted_USD_PHP":50.1924972737},{"feature_month":"2022-01-01","target_month":"2022-02-01","actual_log_return":0.0008857155,"actual_USD_PHP":51.2807,"persistence_USD_PHP":51.2353,"MLR_predicted_return":0.0032507858,"MLR_predicted_USD_PHP":51.4021259989,"Random Forest_predicted_return":0.0075942634,"Random Forest_predicted_USD_PHP":51.6258755518,"ARIMA022_predicted_return":0.0071302604,"ARIMA022_predicted_USD_PHP":51.6019265501,"XGBoost_predicted_return":0.0077394964,"XGBoost_predicted_USD_PHP":51.6333770007,"LSTM_predicted_return":0.0012472931,"LSTM_predicted_USD_PHP":51.2992453063,"GARCH_LSTM_predicted_return":-0.0018840566,"GARCH_LSTM_predicted_USD_PHP":51.1388606718},{"feature_month":"2022-02-01","target_month":"2022-03-01","actual_log_return":0.0153513208,"actual_USD_PHP":52.074,"persistence_USD_PHP":51.2807,"MLR_predicted_return":0.000427209,"MLR_predicted_USD_PHP":51.3026122572,"Random Forest_predicted_return":-0.0005312717,"Random Forest_predicted_USD_PHP":51.2534632486,"ARIMA022_predicted_return":-0.0011537854,"ARIMA022_predicted_USD_PHP":51.221567197,"XGBoost_predicted_return":-0.0002480091,"XGBoost_predicted_USD_PHP":51.2679785644,"LSTM_predicted_return":0.0005880081,"LSTM_predicted_USD_PHP":51.3108623332,"GARCH_LSTM_predicted_return":0.0001186556,"GARCH_LSTM_predicted_USD_PHP":51.2867851057},{"feature_month":"2022-03-01","target_month":"2022-04-01","actual_log_return":-0.0018837103,"actual_USD_PHP":51.976,"persistence_USD_PHP":52.074,"MLR_predicted_return":0.0075372154,"MLR_predicted_USD_PHP":52.4679758318,"Random Forest_predicted_return":0.0049238203,"Random Forest_predicted_USD_PHP":52.3310352971,"ARIMA022_predicted_return":0.0066005905,"ARIMA022_predicted_USD_PHP":52.4188560223,"XGBoost_predicted_return":0.0009097438,"XGBoost_predicted_USD_PHP":52.1213896165,"LSTM_predicted_return":0.0020661226,"LSTM_predicted_USD_PHP":52.1817024933,"GARCH_LSTM_predicted_return":0.000306007,"GARCH_LSTM_predicted_USD_PHP":52.0899374492},{"feature_month":"2022-04-01","target_month":"2022-05-01","actual_log_return":0.0073952443,"actual_USD_PHP":52.3618,"persistence_USD_PHP":51.976,"MLR_predicted_return":0.0056244671,"MLR_predicted_USD_PHP":52.2691609675,"Random Forest_predicted_return":-0.002204129,"Random Forest_predicted_USD_PHP":51.8615643504,"ARIMA022_predicted_return":-0.0018200463,"ARIMA022_predicted_USD_PHP":51.8814873081,"XGBoost_predicted_return":-0.0034169741,"XGBoost_predicted_USD_PHP":51.7987008295,"LSTM_predicted_return":0.0008089922,"LSTM_predicted_USD_PHP":52.018065191,"GARCH_LSTM_predicted_return":0.0020461271,"GARCH_LSTM_predicted_USD_PHP":52.082458379},{"feature_month":"2022-05-01","target_month":"2022-06-01","actual_log_return":0.0227838909,"actual_USD_PHP":53.5685,"persistence_USD_PHP":52.3618,"MLR_predicted_return":0.0043841938,"MLR_predicted_USD_PHP":52.5918682445,"Random Forest_predicted_return":0.005546133,"Random Forest_predicted_USD_PHP":52.6530123107,"ARIMA022_predicted_return":0.0041508798,"ARIMA022_predicted_USD_PHP":52.5795992562,"XGBoost_predicted_return":0.0087716766,"XGBoost_predicted_USD_PHP":52.8231222111,"LSTM_predicted_return":-0.0011444386,"LSTM_predicted_USD_PHP":52.3019094103,"GARCH_LSTM_predicted_return":0.000464941,"GARCH_LSTM_predicted_USD_PHP":52.3861508079},{"feature_month":"2022-06-01","target_month":"2022-07-01","actual_log_return":0.0424689942,"actual_USD_PHP":55.8925,"persistence_USD_PHP":53.5685,"MLR_predicted_return":0.0179325414,"MLR_predicted_USD_PHP":54.5377842336,"Random Forest_predicted_return":0.0059172531,"Random Forest_predicted_USD_PHP":53.8864180473,"ARIMA022_predicted_return":0.0074160672,"ARIMA022_predicted_USD_PHP":53.9672443239,"XGBoost_predicted_return":0.0056637018,"XGBoost_predicted_USD_PHP":53.8727544344,"LSTM_predicted_return":-0.0023301523,"LSTM_predicted_USD_PHP":53.4438225507,"GARCH_LSTM_predicted_return":-0.0009119656,"GARCH_LSTM_predicted_USD_PHP":53.519669639},{"feature_month":"2022-07-01","target_month":"2022-08-01","actual_log_return":-0.0025509989,"actual_USD_PHP":55.7501,"persistence_USD_PHP":55.8925,"MLR_predicted_return":0.0181896649,"MLR_predicted_USD_PHP":56.918468569,"Random Forest_predicted_return":0.0080120967,"Random Forest_predicted_USD_PHP":56.3421148861,"ARIMA022_predicted_return":0.0131456656,"ARIMA022_predicted_USD_PHP":56.6320946937,"XGBoost_predicted_return":0.0043143067,"XGBoost_predicted_USD_PHP":56.1341569093,"LSTM_predicted_return":-0.0009333496,"LSTM_predicted_USD_PHP":55.8403570951,"GARCH_LSTM_predicted_return":0.0022023658,"GARCH_LSTM_predicted_USD_PHP":56.0157313798},{"feature_month":"2022-08-01","target_month":"2022-09-01","actual_log_return":0.0297537761,"actual_USD_PHP":57.4338,"persistence_USD_PHP":55.7501,"MLR_predicted_return":0.0002838898,"MLR_predicted_USD_PHP":55.7659291315,"Random Forest_predicted_return":-0.0010502243,"Random Forest_predicted_USD_PHP":55.6915806271,"ARIMA022_predicted_return":-0.0039838547,"ARIMA022_predicted_USD_PHP":55.5284415235,"XGBoost_predicted_return":-0.0024280492,"XGBoost_predicted_USD_PHP":55.6148985268,"LSTM_predicted_return":0.0008441868,"LSTM_predicted_USD_PHP":55.7971833667,"GARCH_LSTM_predicted_return":0.0066101183,"GARCH_LSTM_predicted_USD_PHP":56.1198354084},{"feature_month":"2022-09-01","target_month":"2022-10-01","actual_log_return":0.0239288545,"actual_USD_PHP":58.8247,"persistence_USD_PHP":57.4338,"MLR_predicted_return":0.015488089,"MLR_predicted_USD_PHP":58.3302641419,"Random Forest_predicted_return":-0.0021242166,"Random Forest_predicted_USD_PHP":57.3119276575,"ARIMA022_predicted_return":0.012231134,"ARIMA022_predicted_USD_PHP":58.140594137,"XGBoost_predicted_return":0.0010631612,"XGBoost_predicted_USD_PHP":57.494892591,"LSTM_predicted_return":0.003674421,"LSTM_predicted_USD_PHP":57.6452241533,"GARCH_LSTM_predicted_return":0.0027993615,"GARCH_LSTM_predicted_USD_PHP":57.5948032152},{"feature_month":"2022-10-01","target_month":"2022-11-01","actual_log_return":-0.0201316929,"actual_USD_PHP":57.6523,"persistence_USD_PHP":58.8247,"MLR_predicted_return":0.0071029828,"MLR_predicted_USD_PHP":59.2440182718,"Random Forest_predicted_return":0.0009184841,"Random Forest_predicted_USD_PHP":58.8787543691,"ARIMA022_predicted_return":0.0054410219,"ARIMA022_predicted_USD_PHP":59.1456388077,"XGBoost_predicted_return":0.0005863296,"XGBoost_predicted_USD_PHP":58.8592012574,"LSTM_predicted_return":0.0010016432,"LSTM_predicted_USD_PHP":58.8836508826,"GARCH_LSTM_predicted_return":0.0042053359,"GARCH_LSTM_predicted_USD_PHP":59.0725985034},{"feature_month":"2022-11-01","target_month":"2022-12-01","actual_log_return":-0.0347390852,"actual_USD_PHP":55.6839,"persistence_USD_PHP":57.6523,"MLR_predicted_return":-0.0048645463,"MLR_predicted_USD_PHP":57.3725287488,"Random Forest_predicted_return":-0.0025109883,"Random Forest_predicted_USD_PHP":57.5077173507,"ARIMA022_predicted_return":-0.0072549842,"ARIMA022_predicted_USD_PHP":57.2355470711,"XGBoost_predicted_return":-0.003793088,"XGBoost_predicted_USD_PHP":57.4340371197,"LSTM_predicted_return":0.002127483,"LSTM_predicted_USD_PHP":57.7750848544,"GARCH_LSTM_predicted_return":0.0014373917,"GARCH_LSTM_predicted_USD_PHP":57.7352285257},{"feature_month":"2022-12-01","target_month":"2023-01-01","actual_log_return":-0.0125160658,"actual_USD_PHP":54.9913,"persistence_USD_PHP":55.6839,"MLR_predicted_return":-0.0043790997,"MLR_predicted_USD_PHP":55.4405877814,"Random Forest_predicted_return":0.0001200065,"Random Forest_predicted_USD_PHP":55.6905828329,"ARIMA022_predicted_return":-0.0082770335,"ARIMA022_predicted_USD_PHP":55.224904676,"XGBoost_predicted_return":-2.62119e-05,"XGBoost_predicted_USD_PHP":55.6824429506,"LSTM_predicted_return":0.0032929406,"LSTM_predicted_USD_PHP":55.8675660073,"GARCH_LSTM_predicted_return":-0.0003503322,"GARCH_LSTM_predicted_USD_PHP":55.6643955531},{"feature_month":"2023-01-01","target_month":"2023-02-01","actual_log_return":-0.0037932387,"actual_USD_PHP":54.7831,"persistence_USD_PHP":54.9913,"MLR_predicted_return":-0.00713562,"MLR_predicted_USD_PHP":54.6002996563,"Random Forest_predicted_return":0.004653517,"Random Forest_predicted_USD_PHP":55.2477993005,"ARIMA022_predicted_return":-0.0002263819,"ARIMA022_predicted_USD_PHP":54.9788523758,"XGBoost_predicted_return":0.0010669144,"XGBoost_predicted_USD_PHP":55.0500042679,"LSTM_predicted_return":-0.0014685794,"LSTM_predicted_USD_PHP":54.9106001811,"GARCH_LSTM_predicted_return":0.0021600393,"GARCH_LSTM_predicted_USD_PHP":55.110211748},{"feature_month":"2023-02-01","target_month":"2023-03-01","actual_log_return":0.0002281465,"actual_USD_PHP":54.7956,"persistence_USD_PHP":54.7831,"MLR_predicted_return":0.0037816,"MLR_predicted_USD_PHP":54.9906599784,"Random Forest_predicted_return":0.0024175339,"Random Forest_predicted_USD_PHP":54.9157002179,"ARIMA022_predicted_return":-1.59237e-05,"ARIMA022_predicted_USD_PHP":54.7822276571,"XGBoost_predicted_return":0.0034521825,"XGBoost_predicted_USD_PHP":54.9725477544,"LSTM_predicted_return":-0.0043562874,"LSTM_predicted_USD_PHP":54.5449681327,"GARCH_LSTM_predicted_return":0.000503306,"GARCH_LSTM_predicted_USD_PHP":54.8106796021},{"feature_month":"2023-03-01","target_month":"2023-04-01","actual_log_return":0.0094432598,"actual_USD_PHP":55.3155,"persistence_USD_PHP":54.7956,"MLR_predicted_return":-0.0016843417,"MLR_predicted_USD_PHP":54.7033831716,"Random Forest_predicted_return":-0.0010573717,"Random Forest_predicted_USD_PHP":54.7376913048,"ARIMA022_predicted_return":0.0012989272,"ARIMA022_predicted_USD_PHP":54.8668217399,"XGBoost_predicted_return":0.0013682009,"XGBoost_predicted_USD_PHP":54.8706216801,"LSTM_predicted_return":-0.0039919871,"LSTM_predicted_USD_PHP":54.577292702,"GARCH_LSTM_predicted_return":0.0023780207,"GARCH_LSTM_predicted_USD_PHP":54.9260601263},{"feature_month":"2023-04-01","target_month":"2023-05-01","actual_log_return":0.0074277606,"actual_USD_PHP":55.7279,"persistence_USD_PHP":55.3155,"MLR_predicted_return":-0.0002041559,"MLR_predicted_USD_PHP":55.3042081677,"Random Forest_predicted_return":0.002715917,"Random Forest_predicted_USD_PHP":55.4659365007,"ARIMA022_predicted_return":0.0040374103,"ARIMA022_predicted_USD_PHP":55.5392828174,"XGBoost_predicted_return":0.0036367865,"XGBoost_predicted_USD_PHP":55.5170361341,"LSTM_predicted_return":-0.0048007178,"LSTM_predicted_USD_PHP":55.0505823002,"GARCH_LSTM_predicted_return":0.0053510778,"GARCH_LSTM_predicted_USD_PHP":55.6122909095},{"feature_month":"2023-05-01","target_month":"2023-06-01","actual_log_return":0.0029868552,"actual_USD_PHP":55.8946,"persistence_USD_PHP":55.7279,"MLR_predicted_return":0.003234816,"MLR_predicted_USD_PHP":55.908461388,"Random Forest_predicted_return":-0.0008592475,"Random Forest_predicted_USD_PHP":55.6800365086,"ARIMA022_predicted_return":0.0024248487,"ARIMA022_predicted_USD_PHP":55.8631956969,"XGBoost_predicted_return":0.0010600641,"XGBoost_predicted_USD_PHP":55.7870052921,"LSTM_predicted_return":-0.0027867197,"LSTM_predicted_USD_PHP":55.5728181481,"GARCH_LSTM_predicted_return":0.0033788262,"GARCH_LSTM_predicted_USD_PHP":55.9165133547},{"feature_month":"2023-06-01","target_month":"2023-07-01","actual_log_return":-0.0175701646,"actual_USD_PHP":54.9211,"persistence_USD_PHP":55.8946,"MLR_predicted_return":-0.0002862028,"MLR_predicted_USD_PHP":55.8786050993,"Random Forest_predicted_return":0.0035364873,"Random Forest_predicted_USD_PHP":56.0926204863,"ARIMA022_predicted_return":0.0014536293,"ARIMA022_predicted_USD_PHP":55.9759091105,"XGBoost_predicted_return":0.0072152284,"XGBoost_predicted_USD_PHP":56.2993533842,"LSTM_predicted_return":-0.0036635061,"LSTM_predicted_USD_PHP":55.6902044213,"GARCH_LSTM_predicted_return":0.0056196284,"GARCH_LSTM_predicted_USD_PHP":56.2095911166},{"feature_month":"2023-07-01","target_month":"2023-08-01","actual_log_return":0.0223053693,"actual_USD_PHP":56.1599,"persistence_USD_PHP":54.9211,"MLR_predicted_return":-0.0048997921,"MLR_predicted_USD_PHP":54.6526562262,"Random Forest_predicted_return":-0.0023587285,"Random Forest_predicted_USD_PHP":54.7917086959,"ARIMA022_predicted_return":-0.0054658644,"ARIMA022_predicted_USD_PHP":54.6217276224,"XGBoost_predicted_return":0.0006688567,"XGBoost_predicted_USD_PHP":54.9578489021,"LSTM_predicted_return":-0.0025141975,"LSTM_predicted_USD_PHP":54.7831909461,"GARCH_LSTM_predicted_return":0.0064567463,"GARCH_LSTM_predicted_USD_PHP":55.2768588932},{"feature_month":"2023-08-01","target_month":"2023-09-01","actual_log_return":0.0111026862,"actual_USD_PHP":56.7869,"persistence_USD_PHP":56.1599,"MLR_predicted_return":0.0170623046,"MLR_predicted_USD_PHP":57.1263387079,"Random Forest_predicted_return":0.0066905505,"Random Forest_predicted_USD_PHP":56.5369004092,"ARIMA022_predicted_return":0.0104861595,"ARIMA022_predicted_USD_PHP":56.7519001488,"XGBoost_predicted_return":0.0113693485,"XGBoost_predicted_USD_PHP":56.802043384,"LSTM_predicted_return":-0.002304316,"LSTM_predicted_USD_PHP":56.0306388285,"GARCH_LSTM_predicted_return":0.0063270475,"GARCH_LSTM_predicted_USD_PHP":56.5163528115},{"feature_month":"2023-09-01","target_month":"2023-10-01","actual_log_return":3.52188e-05,"actual_USD_PHP":56.7889,"persistence_USD_PHP":56.7869,"MLR_predicted_return":0.0040215835,"MLR_predicted_USD_PHP":57.0157330869,"Random Forest_predicted_return":-0.0042745767,"Random Forest_predicted_USD_PHP":56.5446781088,"ARIMA022_predicted_return":0.0014979757,"ARIMA022_predicted_USD_PHP":56.8720291413,"XGBoost_predicted_return":-0.0006354426,"XGBoost_predicted_USD_PHP":56.7508251959,"LSTM_predicted_return":-0.0013313657,"LSTM_predicted_USD_PHP":56.711346177,"GARCH_LSTM_predicted_return":0.008638571,"GARCH_LSTM_predicted_USD_PHP":57.2795826416},{"feature_month":"2023-10-01","target_month":"2023-11-01","actual_log_return":-0.0173484006,"actual_USD_PHP":55.8122,"persistence_USD_PHP":56.7889,"MLR_predicted_return":-0.0012231227,"MLR_predicted_USD_PHP":56.71948267,"Random Forest_predicted_return":-0.0006902329,"Random Forest_predicted_USD_PHP":56.7497159577,"ARIMA022_predicted_return":0.0007876051,"ARIMA022_predicted_USD_PHP":56.8336448449,"XGBoost_predicted_return":-0.0017385072,"XGBoost_predicted_USD_PHP":56.6902577626,"LSTM_predicted_return":0.0009659276,"LSTM_predicted_USD_PHP":56.8437804675,"GARCH_LSTM_predicted_return":0.0068275873,"GARCH_LSTM_predicted_USD_PHP":57.177957822},{"feature_month":"2023-11-01","target_month":"2023-12-01","actual_log_return":-0.0040305297,"actual_USD_PHP":55.5877,"persistence_USD_PHP":55.8122,"MLR_predicted_return":-0.0052911534,"MLR_predicted_USD_PHP":55.517668982,"Random Forest_predicted_return":0.0003802752,"Random Forest_predicted_USD_PHP":55.8334280293,"ARIMA022_predicted_return":-0.0050135714,"ARIMA022_predicted_USD_PHP":55.5330818218,"XGBoost_predicted_return":-0.0010953669,"XGBoost_predicted_USD_PHP":55.7510991191,"LSTM_predicted_return":0.0024839581,"LSTM_predicted_USD_PHP":55.9510074934,"GARCH_LSTM_predicted_return":0.0025655283,"GARCH_LSTM_predicted_USD_PHP":55.95557161},{"feature_month":"2023-12-01","target_month":"2024-01-01","actual_log_return":0.0068949717,"actual_USD_PHP":55.9723,"persistence_USD_PHP":55.5877,"MLR_predicted_return":-0.0063822998,"MLR_predicted_USD_PHP":55.2340523786,"Random Forest_predicted_return":-0.0049731686,"Random Forest_predicted_USD_PHP":55.311939267,"ARIMA022_predicted_return":0.0015394254,"ARIMA022_predicted_USD_PHP":55.6733390175,"XGBoost_predicted_return":-0.0083350213,"XGBoost_predicted_USD_PHP":55.1263018551,"LSTM_predicted_return":0.0022399735,"LSTM_predicted_USD_PHP":55.7123545352,"GARCH_LSTM_predicted_return":0.0018650061,"GARCH_LSTM_predicted_USD_PHP":55.6914681309},{"feature_month":"2024-01-01","target_month":"2024-02-01","actual_log_return":0.0016530228,"actual_USD_PHP":56.0649,"persistence_USD_PHP":55.9723,"MLR_predicted_return":0.0035201846,"MLR_predicted_USD_PHP":56.1696800295,"Random Forest_predicted_return":0.0009906952,"Random Forest_predicted_USD_PHP":56.0277789673,"ARIMA022_predicted_return":0.0030356132,"ARIMA022_predicted_USD_PHP":56.1424684062,"XGBoost_predicted_return":0.0029293925,"XGBoost_predicted_USD_PHP":56.1365015375,"LSTM_predicted_return":0.0005900721,"LSTM_predicted_USD_PHP":56.0053374406,"GARCH_LSTM_predicted_return":0.000677828,"GARCH_LSTM_predicted_USD_PHP":56.0102524521},{"feature_month":"2024-02-01","target_month":"2024-03-01","actual_log_return":-0.0038529564,"actual_USD_PHP":55.8493,"persistence_USD_PHP":56.0649,"MLR_predicted_return":0.0006605039,"MLR_predicted_USD_PHP":56.1019433162,"Random Forest_predicted_return":-0.0005529436,"Random Forest_predicted_USD_PHP":56.0339078413,"ARIMA022_predicted_return":0.0007509124,"ARIMA022_predicted_USD_PHP":56.10701564,"XGBoost_predicted_return":-0.0024602551,"XGBoost_predicted_USD_PHP":55.927133903,"LSTM_predicted_return":9.64316e-05,"LSTM_predicted_USD_PHP":56.0703066862,"GARCH_LSTM_predicted_return":0.0003587493,"GARCH_LSTM_predicted_USD_PHP":56.0850168534},{"feature_month":"2024-03-01","target_month":"2024-04-01","actual_log_return":0.0195272335,"actual_USD_PHP":56.9506,"persistence_USD_PHP":55.8493,"MLR_predicted_return":-0.0037689248,"MLR_predicted_USD_PHP":55.6392043563,"Random Forest_predicted_return":-0.0006372217,"Random Forest_predicted_USD_PHP":55.8137229512,"ARIMA022_predicted_return":-0.0003657795,"ARIMA022_predicted_USD_PHP":55.8288752069,"XGBoost_predicted_return":-0.0022461773,"XGBoost_predicted_USD_PHP":55.7239943861,"LSTM_predicted_return":0.0006036217,"LSTM_predicted_USD_PHP":55.8830220233,"GARCH_LSTM_predicted_return":0.0020558469,"GARCH_LSTM_predicted_USD_PHP":55.9642357123},{"feature_month":"2024-04-01","target_month":"2024-05-01","actual_log_return":0.0141451634,"actual_USD_PHP":57.7619,"persistence_USD_PHP":56.9506,"MLR_predicted_return":0.008998629,"MLR_predicted_USD_PHP":57.4653900475,"Random Forest_predicted_return":0.0062626434,"Random Forest_predicted_USD_PHP":57.3083804536,"ARIMA022_predicted_return":0.0079161898,"ARIMA022_predicted_USD_PHP":57.403220909,"XGBoost_predicted_return":0.0095055364,"XGBoost_predicted_USD_PHP":57.494524352,"LSTM_predicted_return":0.0018345129,"LSTM_predicted_USD_PHP":57.055172502,"GARCH_LSTM_predicted_return":0.0023505911,"GARCH_LSTM_predicted_USD_PHP":57.0846250321},{"feature_month":"2024-05-01","target_month":"2024-06-01","actual_log_return":0.0160473037,"actual_USD_PHP":58.6963,"persistence_USD_PHP":57.7619,"MLR_predicted_return":0.008088491,"MLR_predicted_USD_PHP":58.2310012141,"Random Forest_predicted_return":0.0077762049,"Random Forest_predicted_USD_PHP":58.2128193155,"ARIMA022_predicted_return":0.0033981427,"ARIMA022_predicted_USD_PHP":57.9585170574,"XGBoost_predicted_return":0.007760128,"XGBoost_predicted_USD_PHP":58.2118840933,"LSTM_predicted_return":-0.0001978441,"LSTM_predicted_USD_PHP":57.7504732801,"GARCH_LSTM_predicted_return":0.0025503535,"GARCH_LSTM_predicted_USD_PHP":57.9094012758},{"feature_month":"2024-06-01","target_month":"2024-07-01","actual_log_return":-0.0036149306,"actual_USD_PHP":58.4845,"persistence_USD_PHP":58.6963,"MLR_predicted_return":0.0078972479,"MLR_predicted_USD_PHP":59.1616744018,"Random Forest_predicted_return":0.0039244565,"Random Forest_predicted_USD_PHP":58.9271036665,"ARIMA022_predicted_return":0.0056163728,"ARIMA022_predicted_USD_PHP":59.0268877845,"XGBoost_predicted_return":0.0057563386,"XGBoost_predicted_USD_PHP":59.0351437061,"LSTM_predicted_return":-0.0007462585,"LSTM_predicted_USD_PHP":58.6525137252,"GARCH_LSTM_predicted_return":0.0030936389,"GARCH_LSTM_predicted_USD_PHP":58.8781663276},{"feature_month":"2024-07-01","target_month":"2024-08-01","actual_log_return":-0.0223215063,"actual_USD_PHP":57.1935,"persistence_USD_PHP":58.4845,"MLR_predicted_return":0.0027225914,"MLR_predicted_USD_PHP":58.6439463515,"Random Forest_predicted_return":0.0014149709,"Random Forest_predicted_USD_PHP":58.5673124406,"ARIMA022_predicted_return":-0.0018189592,"ARIMA022_predicted_USD_PHP":58.378215774,"XGBoost_predicted_return":0.0027038879,"XGBoost_predicted_USD_PHP":58.6428526669,"LSTM_predicted_return":-0.001007989,"LSTM_predicted_USD_PHP":58.4255779658,"GARCH_LSTM_predicted_return":0.0031832196,"GARCH_LSTM_predicted_USD_PHP":58.6709656287},{"feature_month":"2024-08-01","target_month":"2024-09-01","actual_log_return":-0.0198161604,"actual_USD_PHP":56.0713,"persistence_USD_PHP":57.1935,"MLR_predicted_return":-0.0058291033,"MLR_predicted_USD_PHP":56.8610829685,"Random Forest_predicted_return":-0.0033653654,"Random Forest_predicted_USD_PHP":57.0013464914,"ARIMA022_predicted_return":-0.005864864,"ARIMA022_predicted_USD_PHP":56.8590496122,"XGBoost_predicted_return":-0.0020263726,"XGBoost_predicted_USD_PHP":57.0777236014,"LSTM_predicted_return":0.0002087296,"LSTM_predicted_USD_PHP":57.20543922,"GARCH_LSTM_predicted_return":0.0077089109,"GARCH_LSTM_predicted_USD_PHP":57.636103396},{"feature_month":"2024-09-01","target_month":"2024-10-01","actual_log_return":0.0216922352,"actual_USD_PHP":57.3009,"persistence_USD_PHP":56.0713,"MLR_predicted_return":-0.0049855726,"MLR_predicted_USD_PHP":55.7924481575,"Random Forest_predicted_return":-0.0068383062,"Random Forest_predicted_USD_PHP":55.6891753146,"ARIMA022_predicted_return":-0.0036701602,"ARIMA022_predicted_USD_PHP":55.8658865298,"XGBoost_predicted_return":-0.0100893332,"XGBoost_predicted_USD_PHP":55.5084218475,"LSTM_predicted_return":-0.0014501676,"LSTM_predicted_USD_PHP":55.9900461464,"GARCH_LSTM_predicted_return":0.0061537041,"GARCH_LSTM_predicted_USD_PHP":56.4174100277},{"feature_month":"2024-10-01","target_month":"2024-11-01","actual_log_return":0.0240331027,"actual_USD_PHP":58.6947,"persistence_USD_PHP":57.3009,"MLR_predicted_return":0.0145111285,"MLR_predicted_USD_PHP":58.1384630156,"Random Forest_predicted_return":0.0082576024,"Random Forest_predicted_USD_PHP":57.7760270568,"ARIMA022_predicted_return":0.0097753896,"ARIMA022_predicted_USD_PHP":57.863785352,"XGBoost_predicted_return":0.007832054,"XGBoost_predicted_USD_PHP":57.7514458787,"LSTM_predicted_return":-0.0022303343,"LSTM_predicted_USD_PHP":57.1732422483,"GARCH_LSTM_predicted_return":0.0030587334,"GARCH_LSTM_predicted_USD_PHP":57.4764365006},{"feature_month":"2024-11-01","target_month":"2024-12-01","actual_log_return":-0.0042119631,"actual_USD_PHP":58.448,"persistence_USD_PHP":58.6947,"MLR_predicted_return":0.0073374824,"MLR_predicted_USD_PHP":59.1269552242,"Random Forest_predicted_return":-0.0015160431,"Random Forest_predicted_USD_PHP":58.6057837214,"ARIMA022_predicted_return":0.0061572976,"ARIMA022_predicted_USD_PHP":59.0572156513,"XGBoost_predicted_return":8.0693e-05,"XGBoost_predicted_USD_PHP":58.6994369375,"LSTM_predicted_return":-0.0001960927,"LSTM_predicted_USD_PHP":58.6831915277,"GARCH_LSTM_predicted_return":0.0022182474,"GARCH_LSTM_predicted_USD_PHP":58.8250438792},{"feature_month":"2024-12-01","target_month":"2025-01-01","actual_log_return":-0.0009825521,"actual_USD_PHP":58.3906,"persistence_USD_PHP":58.448,"MLR_predicted_return":-0.0057717879,"MLR_predicted_USD_PHP":58.1116222235,"Random Forest_predicted_return":0.0004385513,"Random Forest_predicted_USD_PHP":58.4736380702,"ARIMA022_predicted_return":-0.0023507768,"ARIMA022_predicted_USD_PHP":58.3107631674,"XGBoost_predicted_return":0.0011259522,"XGBoost_predicted_USD_PHP":58.5138502636,"LSTM_predicted_return":0.0012175986,"LSTM_predicted_USD_PHP":58.5192095442,"GARCH_LSTM_predicted_return":0.0038750491,"GARCH_LSTM_predicted_USD_PHP":58.6749282628},{"feature_month":"2025-01-01","target_month":"2025-02-01","actual_log_return":-0.005089087,"actual_USD_PHP":58.0942,"persistence_USD_PHP":58.3906,"MLR_predicted_return":0.0008128485,"MLR_predicted_USD_PHP":58.4380820053,"Random Forest_predicted_return":0.0006842472,"Random Forest_predicted_USD_PHP":58.4305672785,"ARIMA022_predicted_return":0.0017361371,"ARIMA022_predicted_USD_PHP":58.4920621361,"XGBoost_predicted_return":0.0029966224,"XGBoost_predicted_USD_PHP":58.5658426321,"LSTM_predicted_return":0.0029684517,"LSTM_predicted_USD_PHP":58.5641871914,"GARCH_LSTM_predicted_return":0.0003838823,"GARCH_LSTM_predicted_USD_PHP":58.4130194184},{"feature_month":"2025-02-01","target_month":"2025-03-01","actual_log_return":-0.011593048,"actual_USD_PHP":57.4246,"persistence_USD_PHP":58.0942,"MLR_predicted_return":-0.0079464523,"MLR_predicted_USD_PHP":57.6343865737,"Random Forest_predicted_return":-0.0017126991,"Random Forest_predicted_USD_PHP":57.9947872721,"ARIMA022_predicted_return":-0.0011320291,"ARIMA022_predicted_USD_PHP":58.0284728844,"XGBoost_predicted_return":-0.0022233685,"XGBoost_predicted_USD_PHP":57.9651769257,"LSTM_predicted_return":0.001087754,"LSTM_predicted_USD_PHP":58.1574265816,"GARCH_LSTM_predicted_return":0.0006608226,"GARCH_LSTM_predicted_USD_PHP":58.1326026448},{"feature_month":"2025-03-01","target_month":"2025-04-01","actual_log_return":-0.0100055526,"actual_USD_PHP":56.8529,"persistence_USD_PHP":57.4246,"MLR_predicted_return":-0.001977346,"MLR_predicted_USD_PHP":57.3111638826,"Random Forest_predicted_return":-0.0018762711,"Random Forest_predicted_USD_PHP":57.3169568987,"ARIMA022_predicted_return":-0.0024538592,"ARIMA022_predicted_USD_PHP":57.2838608634,"XGBoost_predicted_return":-0.0034576575,"XGBoost_predicted_USD_PHP":57.226390645,"LSTM_predicted_return":-0.000563685,"LSTM_predicted_USD_PHP":57.3922397376,"GARCH_LSTM_predicted_return":-9.02127e-05,"GARCH_LSTM_predicted_USD_PHP":57.4194198051},{"feature_month":"2025-04-01","target_month":"2025-05-01","actual_log_return":-0.0218416809,"actual_USD_PHP":55.6246,"persistence_USD_PHP":56.8529,"MLR_predicted_return":-0.0115372314,"MLR_predicted_USD_PHP":56.2007442074,"Random Forest_predicted_return":-0.001998808,"Random Forest_predicted_USD_PHP":56.7393754631,"ARIMA022_predicted_return":-0.0014679269,"ARIMA022_predicted_USD_PHP":56.7695053221,"XGBoost_predicted_return":-0.0034906762,"XGBoost_predicted_USD_PHP":56.65479339,"LSTM_predicted_return":-0.0013174756,"LSTM_predicted_USD_PHP":56.7780470123,"GARCH_LSTM_predicted_return":0.0032302381,"GARCH_LSTM_predicted_USD_PHP":57.0368453374},{"feature_month":"2025-05-01","target_month":"2025-06-01","actual_log_return":0.013109297,"actual_USD_PHP":56.3586,"persistence_USD_PHP":55.6246,"MLR_predicted_return":-0.0027681083,"MLR_predicted_USD_PHP":55.4708379979,"Random Forest_predicted_return":-0.0060834223,"Random Forest_predicted_USD_PHP":55.2872392632,"ARIMA022_predicted_return":-0.0060979969,"ARIMA022_predicted_USD_PHP":55.286433477,"XGBoost_predicted_return":-0.0086962096,"XGBoost_predicted_USD_PHP":55.1429728252,"LSTM_predicted_return":-0.0015401259,"LSTM_predicted_USD_PHP":55.5389970478,"GARCH_LSTM_predicted_return":0.0048961588,"GARCH_LSTM_predicted_USD_PHP":55.897614692},{"feature_month":"2025-06-01","target_month":"2025-07-01","actual_log_return":0.0069613378,"actual_USD_PHP":56.7523,"persistence_USD_PHP":56.3586,"MLR_predicted_return":0.0091131453,"MLR_predicted_USD_PHP":56.874551509,"Random Forest_predicted_return":0.0023718803,"Random Forest_predicted_USD_PHP":56.4924345088,"ARIMA022_predicted_return":0.007671649,"ARIMA022_predicted_USD_PHP":56.7926261186,"XGBoost_predicted_return":0.0025439921,"XGBoost_predicted_USD_PHP":56.5021602385,"LSTM_predicted_return":-0.0019762728,"LSTM_predicted_USD_PHP":56.2473300185,"GARCH_LSTM_predicted_return":0.0055941571,"GARCH_LSTM_predicted_USD_PHP":56.6747623715},{"feature_month":"2025-07-01","target_month":"2025-08-01","actual_log_return":0.0087751254,"actual_USD_PHP":57.2525,"persistence_USD_PHP":56.7523,"MLR_predicted_return":0.0064867959,"MLR_predicted_USD_PHP":57.1216371969,"Random Forest_predicted_return":8.9919e-05,"Random Forest_predicted_USD_PHP":56.7574033379,"ARIMA022_predicted_return":0.000911742,"ARIMA022_predicted_USD_PHP":56.8040670512,"XGBoost_predicted_return":0.0039160978,"XGBoost_predicted_USD_PHP":56.9749831859,"LSTM_predicted_return":-0.0020746491,"LSTM_predicted_USD_PHP":56.6346809437,"GARCH_LSTM_predicted_return":0.005511282,"GARCH_LSTM_predicted_USD_PHP":57.0659414194},{"feature_month":"2025-08-01","target_month":"2025-09-01","actual_log_return":-4.19204e-05,"actual_USD_PHP":57.2501,"persistence_USD_PHP":57.2525,"MLR_predicted_return":0.0048279597,"MLR_predicted_USD_PHP":57.5295810914,"Random Forest_predicted_return":0.0022590048,"Random Forest_predicted_USD_PHP":57.3819798633,"ARIMA022_predicted_return":0.0038637834,"ARIMA022_predicted_USD_PHP":57.4741391667,"XGBoost_predicted_return":0.0074886484,"XGBoost_predicted_USD_PHP":57.6828522572,"LSTM_predicted_return":-0.0002656837,"LSTM_predicted_USD_PHP":57.2372909668,"GARCH_LSTM_predicted_return":0.0028886008,"GARCH_LSTM_predicted_USD_PHP":57.4181187057},{"feature_month":"2025-09-01","target_month":"2025-10-01","actual_log_return":0.0181452596,"actual_USD_PHP":58.2984,"persistence_USD_PHP":57.2501,"MLR_predicted_return":-0.0013253792,"MLR_predicted_USD_PHP":57.1742721701,"Random Forest_predicted_return":-0.0038079125,"Random Forest_predicted_USD_PHP":57.0325111719,"ARIMA022_predicted_return":-0.000177744,"ARIMA022_predicted_USD_PHP":57.2399250405,"XGBoost_predicted_return":-0.0057407282,"XGBoost_predicted_USD_PHP":56.9223860424,"LSTM_predicted_return":0.0003895639,"LSTM_predicted_USD_PHP":57.2724069175,"GARCH_LSTM_predicted_return":0.0022752811,"GARCH_LSTM_predicted_USD_PHP":57.3805083732},{"feature_month":"2025-10-01","target_month":"2025-11-01","actual_log_return":0.0104973151,"actual_USD_PHP":58.9136,"persistence_USD_PHP":58.2984,"MLR_predicted_return":0.0041187915,"MLR_predicted_USD_PHP":58.5390141336,"Random Forest_predicted_return":0.0062435358,"Random Forest_predicted_USD_PHP":58.6635268038,"ARIMA022_predicted_return":0.0074000118,"ARIMA022_predicted_USD_PHP":58.7314090067,"XGBoost_predicted_return":0.0052520912,"XGBoost_predicted_USD_PHP":58.6053965269,"LSTM_predicted_return":0.0026701367,"LSTM_predicted_USD_PHP":58.4542727082,"GARCH_LSTM_predicted_return":0.000202443,"GARCH_LSTM_predicted_USD_PHP":58.3102032985},{"feature_month":"2025-11-01","target_month":"2025-12-01","actual_log_return":-0.0011005212,"actual_USD_PHP":58.8488,"persistence_USD_PHP":58.9136,"MLR_predicted_return":0.0031604162,"MLR_predicted_USD_PHP":59.1000860254,"Random Forest_predicted_return":0.0074676732,"Random Forest_predicted_USD_PHP":59.3551942984,"ARIMA022_predicted_return":0.002285863,"ARIMA022_predicted_USD_PHP":59.0484224514,"XGBoost_predicted_return":0.006617933,"XGBoost_predicted_USD_PHP":59.3047767729,"LSTM_predicted_return":0.0021130482,"LSTM_predicted_USD_PHP":59.0382188941,"GARCH_LSTM_predicted_return":0.0017490661,"GARCH_LSTM_predicted_USD_PHP":59.0167339456},{"feature_month":"2025-12-01","target_month":"2026-01-01","actual_log_return":0.0053113818,"actual_USD_PHP":59.1622,"persistence_USD_PHP":58.8488,"MLR_predicted_return":-0.0022014153,"MLR_predicted_USD_PHP":58.7193918419,"Random Forest_predicted_return":0.0006378871,"Random Forest_predicted_USD_PHP":58.8863508671,"ARIMA022_predicted_return":5.75352e-05,"ARIMA022_predicted_USD_PHP":58.8521859741,"XGBoost_predicted_return":9.68033e-05,"XGBoost_predicted_USD_PHP":58.8544964428,"LSTM_predicted_return":0.0027923945,"LSTM_predicted_USD_PHP":59.0133587142,"GARCH_LSTM_predicted_return":0.0008104566,"GARCH_LSTM_predicted_USD_PHP":58.8965137294},{"feature_month":"2026-01-01","target_month":"2026-02-01","actual_log_return":-0.0150186956,"actual_USD_PHP":58.2803,"persistence_USD_PHP":59.1622,"MLR_predicted_return":-0.000407586,"MLR_predicted_USD_PHP":59.1380912277,"Random Forest_predicted_return":0.004956511,"Random Forest_predicted_USD_PHP":59.4561660137,"ARIMA022_predicted_return":0.0030279204,"ARIMA022_predicted_USD_PHP":59.3416099139,"XGBoost_predicted_return":0.0051581026,"XGBoost_predicted_USD_PHP":59.4681524772,"LSTM_predicted_return":0.0023648809,"LSTM_predicted_USD_PHP":59.3022771226,"GARCH_LSTM_predicted_return":0.0013046305,"GARCH_LSTM_predicted_USD_PHP":59.2394351836},{"feature_month":"2026-02-01","target_month":"2026-03-01","actual_log_return":0.0191462524,"actual_USD_PHP":59.4069,"persistence_USD_PHP":58.2803,"MLR_predicted_return":-0.0073924303,"MLR_predicted_USD_PHP":57.851055477,"Random Forest_predicted_return":-0.0025469873,"Random Forest_predicted_USD_PHP":58.1320496943,"ARIMA022_predicted_return":-0.0050563335,"ARIMA022_predicted_USD_PHP":57.9863591231,"XGBoost_predicted_return":-0.0060851048,"XGBoost_predicted_USD_PHP":57.926735546,"LSTM_predicted_return":-0.0003749379,"LSTM_predicted_USD_PHP":58.2584526012,"GARCH_LSTM_predicted_return":0.0017900147,"GARCH_LSTM_predicted_USD_PHP":58.3847160176},{"feature_month":"2026-03-01","target_month":"2026-04-01","actual_log_return":0.0147774335,"actual_USD_PHP":60.2913,"persistence_USD_PHP":59.4069,"MLR_predicted_return":0.015529716,"MLR_predicted_USD_PHP":60.3366731572,"Random Forest_predicted_return":0.007013085,"Random Forest_predicted_USD_PHP":59.8249899735,"ARIMA022_predicted_return":0.0091962594,"ARIMA022_predicted_USD_PHP":59.9557410392,"XGBoost_predicted_return":0.010123698,"XGBoost_predicted_USD_PHP":60.0113716775,"LSTM_predicted_return":0.001347812,"LSTM_predicted_USD_PHP":59.4870233167,"GARCH_LSTM_predicted_return":-0.0003601342,"GARCH_LSTM_predicted_USD_PHP":59.3855093954},{"feature_month":"2026-04-01","target_month":"2026-05-01","actual_log_return":0.01888955,"actual_USD_PHP":61.441,"persistence_USD_PHP":60.2913,"MLR_predicted_return":0.0090782438,"MLR_predicted_USD_PHP":60.8411310919,"Random Forest_predicted_return":0.0070409847,"Random Forest_predicted_USD_PHP":60.7173081177,"ARIMA022_predicted_return":0.0031298147,"ARIMA022_predicted_USD_PHP":60.4802962058,"XGBoost_predicted_return":0.0078965761,"XGBoost_predicted_USD_PHP":60.7692758839,"LSTM_predicted_return":0.0012268756,"LSTM_predicted_USD_PHP":60.3653153183,"GARCH_LSTM_predicted_return":0.0004960466,"GARCH_LSTM_predicted_USD_PHP":60.3212147144},{"feature_month":"2026-05-01","target_month":"2026-06-01","actual_log_return":-0.0030922911,"actual_USD_PHP":61.2513,"persistence_USD_PHP":61.441,"MLR_predicted_return":0.0078533624,"MLR_predicted_USD_PHP":61.9254181055,"Random Forest_predicted_return":0.0010083029,"Random Forest_predicted_USD_PHP":61.5029823797,"ARIMA022_predicted_return":0.0065835952,"ARIMA022_predicted_USD_PHP":61.8468371427,"XGBoost_predicted_return":-0.0037291322,"XGBoost_predicted_USD_PHP":61.2123048716,"LSTM_predicted_return":0.003110949,"LSTM_predicted_USD_PHP":61.6324374361,"GARCH_LSTM_predicted_return":0.0012484002,"GARCH_LSTM_predicted_USD_PHP":61.5177508542},{"feature_month":"2026-06-01","target_month":"2026-07-01","actual_log_return":0.0056167301,"actual_USD_PHP":61.5963,"persistence_USD_PHP":61.2513,"MLR_predicted_return":0.0075031884,"MLR_predicted_USD_PHP":61.7126085223,"Random Forest_predicted_return":0.0014626718,"Random Forest_predicted_USD_PHP":61.3409561007,"ARIMA022_predicted_return":-0.0019366686,"ARIMA022_predicted_USD_PHP":61.132791323,"XGBoost_predicted_return":0.0049821348,"XGBoost_predicted_USD_PHP":61.5572276304,"LSTM_predicted_return":0.0015893176,"LSTM_predicted_USD_PHP":61.3487251667,"GARCH_LSTM_predicted_return":0.004592489,"GARCH_LSTM_predicted_USD_PHP":61.5332428347},{"feature_month":"2026-07-01","target_month":"2026-08-01","actual_log_return":-0.0043636646,"actual_USD_PHP":61.3281,"persistence_USD_PHP":61.5963,"MLR_predicted_return":0.008385351,"MLR_predicted_USD_PHP":62.1149782063,"Random Forest_predicted_return":0.0013836029,"Random Forest_predicted_USD_PHP":61.6815838059,"ARIMA022_predicted_return":0.0038247411,"ARIMA022_predicted_USD_PHP":61.8323410105,"XGBoost_predicted_return":0.0022391516,"XGBoost_predicted_USD_PHP":61.7343823161,"LSTM_predicted_return":-0.0001349829,"LSTM_predicted_USD_PHP":61.5879861142,"GARCH_LSTM_predicted_return":0.0016605457,"GARCH_LSTM_predicted_USD_PHP":61.6986684417},{"feature_month":"2026-08-01","target_month":"2026-09-01","actual_log_return":0.0207267995,"actual_USD_PHP":62.6125,"persistence_USD_PHP":61.3281,"MLR_predicted_return":-0.0017476619,"MLR_predicted_USD_PHP":61.2210128221,"Random Forest_predicted_return":-0.0021531954,"Random Forest_predicted_USD_PHP":61.1961906819,"ARIMA022_predicted_return":-0.0014232755,"ARIMA022_predicted_USD_PHP":61.240875302,"XGBoost_predicted_return":-0.0056292028,"XGBoost_predicted_USD_PHP":60.9838416634,"LSTM_predicted_return":-0.0016464143,"LSTM_predicted_USD_PHP":61.2272116151,"GARCH_LSTM_predicted_return":0.0020344842,"GARCH_LSTM_predicted_USD_PHP":61.4529980575},{"feature_month":"2026-09-01","target_month":"2026-10-01","actual_log_return":0.0077494917,"actual_USD_PHP":63.0996,"persistence_USD_PHP":62.6125,"MLR_predicted_return":0.0072831776,"MLR_predicted_USD_PHP":63.0701826294,"Random Forest_predicted_return":0.0089720998,"Random Forest_predicted_USD_PHP":63.1767932617,"ARIMA022_predicted_return":0.0085352473,"ARIMA022_predicted_USD_PHP":63.1492003463,"XGBoost_predicted_return":0.0062305154,"XGBoost_predicted_USD_PHP":63.0038296178,"LSTM_predicted_return":-0.0016220479,"LSTM_predicted_USD_PHP":62.511021852,"GARCH_LSTM_predicted_return":0.0015267805,"GARCH_LSTM_predicted_USD_PHP":62.7081685606}]</script>
+<script id="smMetricData" type="application/json">[{"Model":"MLR","N":93,"MAE_PHP_per_USD":0.5351843788,"RMSE_PHP_per_USD":0.6966112102,"MAPE_percent":0.9706512022,"sMAPE_percent":0.9720687102,"R2_level":0.9695775652,"Directional_Accuracy_percent":60.2150537634,"Theil_U_vs_Persistence":0.9271096807},{"Model":"ARIMA(0,2,2)","N":93,"MAE_PHP_per_USD":0.5497715676,"RMSE_PHP_per_USD":0.7213834309,"MAPE_percent":0.996411937,"sMAPE_percent":0.9985493602,"R2_level":0.9673753864,"Directional_Accuracy_percent":59.1397849462,"Theil_U_vs_Persistence":0.9600786673},{"Model":"Random Forest","N":93,"MAE_PHP_per_USD":0.5854118884,"RMSE_PHP_per_USD":0.7494208906,"MAPE_percent":1.0649514782,"sMAPE_percent":1.0671372181,"R2_level":0.9647901122,"Directional_Accuracy_percent":43.0107526882,"Theil_U_vs_Persistence":0.9973933128},{"Model":"GARCH-LSTM","N":93,"MAE_PHP_per_USD":0.574850519,"RMSE_PHP_per_USD":0.7546937405,"MAPE_percent":1.04439759,"sMAPE_percent":1.0445594412,"R2_level":0.9642929027,"Directional_Accuracy_percent":50.5376344086,"Theil_U_vs_Persistence":1.0044108716},{"Model":"XGBoost","N":93,"MAE_PHP_per_USD":0.5856871069,"RMSE_PHP_per_USD":0.7665596957,"MAPE_percent":1.0677883171,"sMAPE_percent":1.0701625282,"R2_level":0.9631612392,"Directional_Accuracy_percent":54.8387096774,"Theil_U_vs_Persistence":1.020203098},{"Model":"LSTM","N":93,"MAE_PHP_per_USD":0.597402799,"RMSE_PHP_per_USD":0.7713717851,"MAPE_percent":1.0827210492,"sMAPE_percent":1.0849732542,"R2_level":0.9626972758,"Directional_Accuracy_percent":44.0860215054,"Theil_U_vs_Persistence":1.0266074374}]</script>
+<script id="smManifestData" type="application/json">{"status":"historical_evaluation_complete","forecast_type":"one_step_ahead_holdout","model_count":6,"models":["MLR","Random Forest","ARIMA(0,2,2)","XGBoost","LSTM","GARCH-LSTM"],"evaluation_start":"2019-02-01","evaluation_end":"2026-10-01","observations":93,"generated_at_utc":"2026-11-16T04:46:18.953145+00:00"}</script>
+<script id="smMetadataData" type="application/json">{"target":"next-month log return","evaluation_type":"chronological holdout; one-step-ahead forecasts","training_feature_start":"2007-01-01","training_feature_end":"2018-12-01","testing_feature_start":"2019-01-01","lookback_months":12,"training_rows":144,"test_rows_before_common_filter":93,"common_evaluation_rows":93,"feature_columns":["ret_lag_1","ret_lag_2","ret_lag_3","ret_lag_6","ret_lag_12","ret_mean_3","ret_mean_6","ret_mean_12","ret_sd_3","ret_sd_6","ret_sd_12","momentum_12","month_sin","month_cos","JPY_ret","EUR_ret","SGD_ret","CNY_ret","AUD_ret"],"models":["MLR","Random Forest","ARIMA(0,2,2)","XGBoost","LSTM","GARCH-LSTM"],"model_count":6,"gdp_included":false,"random_seed":42}</script>
+<script>
+(function(){
+"use strict";
+const root=document.getElementById("sixModelDashboard"); if(!root)return;
+const forecasts=JSON.parse(document.getElementById("smForecastData").textContent);
+const metrics=JSON.parse(document.getElementById("smMetricData").textContent);
+const manifest=JSON.parse(document.getElementById("smManifestData").textContent);
+const metadata=JSON.parse(document.getElementById("smMetadataData").textContent);
+const defs=[
+ {key:"MLR",field:"MLR_predicted_USD_PHP",label:"Multiple Linear Regression"},
+ {key:"Random Forest",field:"Random Forest_predicted_USD_PHP",label:"Random Forest"},
+ {key:"ARIMA(0,2,2)",field:"ARIMA022_predicted_USD_PHP",label:"ARIMA (0,2,2)"},
+ {key:"XGBoost",field:"XGBoost_predicted_USD_PHP",label:"XGBoost"},
+ {key:"LSTM",field:"LSTM_predicted_USD_PHP",label:"LSTM"},
+ {key:"GARCH-LSTM",field:"GARCH_LSTM_predicted_USD_PHP",label:"GARCH-LSTM"}
+];
+const byMetric=new Map(metrics.map(x=>[x.Model,x]));
+const $=id=>document.getElementById(id);
+const num=(v,d=4)=>Number.isFinite(Number(v))?Number(v).toFixed(d):"—";
+const peso=v=>Number.isFinite(Number(v))?"₱"+Number(v).toFixed(4):"—";
+const pct=v=>Number.isFinite(Number(v))?Number(v).toFixed(2)+"%":"—";
+const dateLabel=s=>{const d=new Date(s+"T00:00:00");return d.toLocaleDateString("en-PH",{month:"short",year:"numeric"})};
+const sortedMetrics=[...metrics].sort((a,b)=>a.MAE_PHP_per_USD-b.MAE_PHP_per_USD);
+const best=sortedMetrics[0];
+defs.forEach(m=>{const o=document.createElement("option");o.value=m.key;o.textContent=m.label;$("smModel").appendChild(o)});
+$("smModel").value=best.Model;
+$("smN").textContent=manifest.observations;
+$("smDates").textContent=dateLabel(manifest.evaluation_start)+" – "+dateLabel(manifest.evaluation_end);
+$("smBest").textContent=best.Model;
+$("smBestMae").textContent="MAE: "+num(best.MAE_PHP_per_USD,4)+" PHP/USD";
+const tbody=$("smMetrics").querySelector("tbody");
+sortedMetrics.forEach((m,i)=>{
+ const tr=document.createElement("tr");if(i===0)tr.className="sm-best";
+ const vals=[(i+1)+" · "+m.Model,num(m.MAE_PHP_per_USD),num(m.RMSE_PHP_per_USD),pct(m.MAPE_percent),pct(m.sMAPE_percent),num(m.R2_level,4),pct(m.Directional_Accuracy_percent),num(m.Theil_U_vs_Persistence)];
+ vals.forEach((v,j)=>{const td=document.createElement("td");td.textContent=v;if(j===0){const b=document.createElement("span");b.className="sm-rank";b.textContent="Rank "+(i+1);td.textContent="";td.append(b,document.createTextNode(" "+m.Model));}tr.appendChild(td)});
+ tbody.appendChild(tr);
+});
+function currentRows(){
+ let a=forecasts.slice();const n=$("smWindow").value;
+ if(n!=="all")a=a.slice(-Number(n));
+ return a;
+}
+function selectedDef(){return defs.find(x=>x.key===$("smModel").value)||defs[0]}
+function renderLatest(){
+ const row=forecasts[forecasts.length-1],m=selectedDef(),metric=byMetric.get(m.key);
+ $("smLatestMonth").textContent=dateLabel(row.target_month)+" · latest holdout record";
+ const list=$("smLatestList");list.innerHTML="";
+ const items=[["Actual BSP",row.actual_USD_PHP],...defs.map(x=>[x.label,row[x.field]])];
+ items.forEach((it,i)=>{const d=document.createElement("div");d.className="sm-model-row";const name=document.createElement("span");name.textContent=it[0];const val=document.createElement("b");val.textContent=peso(it[1]);const delta=document.createElement("small");delta.textContent=i===0?"Actual":(Number(it[1])-Number(row.actual_USD_PHP)>=0?"+":"")+num(Number(it[1])-Number(row.actual_USD_PHP),4);d.append(name,val,delta);list.appendChild(d)});
+ $("smMae").textContent=num(metric.MAE_PHP_per_USD,4);
+ $("smDirection").textContent=pct(metric.Directional_Accuracy_percent);
+ const err=Number(row[m.field])-Number(row.actual_USD_PHP);
+ $("smInterpretation").textContent=m.label+" latest holdout estimate differs from actual BSP by "+(err>=0?"+":"−")+"₱"+Math.abs(err).toFixed(4)+"/USD. This is a historical error, not a forecast for the next month.";
+}
+function drawChart(){
+ const canvas=$("smChart"),rect=canvas.getBoundingClientRect(),dpr=Math.max(1,window.devicePixelRatio||1);
+ const w=Math.max(320,rect.width),h=310;canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);
+ const ctx=canvas.getContext("2d");ctx.scale(dpr,dpr);ctx.clearRect(0,0,w,h);
+ const data=currentRows(),def=selectedDef(),values=data.flatMap(r=>[Number(r.actual_USD_PHP),Number(r[def.field])]).filter(Number.isFinite);
+ if(!data.length||!values.length)return;
+ let min=Math.min(...values),max=Math.max(...values),pad=(max-min)*.12||.5;min-=pad;max+=pad;
+ const L=54,R=14,T=15,B=42,plotW=w-L-R,plotH=h-T-B;
+ ctx.font="10px Segoe UI,Arial";ctx.strokeStyle="#23445e";ctx.fillStyle="#9db4ca";ctx.lineWidth=1;
+ for(let i=0;i<=5;i++){const y=T+i*plotH/5,v=max-i*(max-min)/5;ctx.beginPath();ctx.moveTo(L,y);ctx.lineTo(w-R,y);ctx.stroke();ctx.fillText(v.toFixed(2),4,y+3)}
+ const x=i=>L+(data.length===1?0:i/(data.length-1))*plotW;
+ function line(field,color){ctx.beginPath();ctx.strokeStyle=color;ctx.lineWidth=2;data.forEach((r,i)=>{const v=Number(r[field]);const y=T+(max-v)/(max-min)*plotH;if(i===0)ctx.moveTo(x(i),y);else ctx.lineTo(x(i),y)});ctx.stroke()}
+ line("actual_USD_PHP","#48d8f4");line(def.field,"#ffc46b");
+ ctx.fillStyle="#9db4ca";const ticks=[0,Math.floor((data.length-1)/3),Math.floor(2*(data.length-1)/3),data.length-1];[...new Set(ticks)].forEach(i=>{const label=dateLabel(data[i].target_month);ctx.fillText(label,Math.min(w-65,Math.max(L,x(i)-20)),h-13)});
+ canvas._chart={data,def,min,max,L,R,T,B,plotW,plotH,w,h};
+}
+function render(){renderLatest();drawChart();const n=currentRows().length;$("smChartSubtitle").textContent=n+" monthly records · "+dateLabel(currentRows()[0].target_month)+" to "+dateLabel(currentRows()[n-1].target_month)+" · one-step-ahead holdout"}
+$("smModel").addEventListener("change",render);$("smWindow").addEventListener("change",render);
+$("smReset").addEventListener("click",()=>{$("smModel").value=best.Model;$("smWindow").value="all";render()});
+$("smExport").addEventListener("click",()=>{
+ const cols=["feature_month","target_month","actual_USD_PHP",...defs.map(x=>x.field)];
+ const q=v=>'"'+String(v??"").replace(/"/g,'""')+'"';
+ const csv=[cols.join(","),...currentRows().map(r=>cols.map(c=>q(r[c])).join(","))].join("\r\n");
+ const a=document.createElement("a");const url=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"}));a.href=url;a.download="USD_PHP_six_model_comparison.csv";a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+});
+const canvas=$("smChart");
+function showTooltip(ev){
+ const c=canvas._chart;if(!c)return;const rect=canvas.getBoundingClientRect(),px=(ev.clientX-rect.left),i=Math.max(0,Math.min(c.data.length-1,Math.round((px-c.L)/c.plotW*(c.data.length-1))));
+ const r=c.data[i],v=Number(r[c.def.field]),actual=Number(r.actual_USD_PHP);
+ $("smChartSubtitle").textContent=dateLabel(r.target_month)+" · Actual "+peso(actual)+" · "+c.def.label+" "+peso(v)+" · Error "+(v-actual>=0?"+":"−")+peso(Math.abs(v-actual)).replace("₱","");
+}
+canvas.addEventListener("mousemove",showTooltip);canvas.addEventListener("touchstart",e=>{if(e.touches[0])showTooltip(e.touches[0])},{passive:true});
+window.addEventListener("resize",drawChart);
+$("smStatus").textContent="Python outputs embedded · "+(manifest.model_count||6)+" models · "+(manifest.observations||forecasts.length)+" observations";
+render();
+})();
+</script>
+
+</body>
+</html>
